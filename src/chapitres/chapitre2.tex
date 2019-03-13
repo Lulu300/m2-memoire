@@ -1,3 +1,101 @@
 \documentclass[memoire.tex]{subfiles}
 
-\chapter{Méthodes d'analyse pour choisir la bonne architecture}
+\chapter{Analyse des solutions existantes}
+
+Une fois nos critères définit, il faut décomposer le Big Data qui est un domaine très vaste, en plusieurs catégories~\cite{BIGDATA_OVERALL}. Une fois cette décomposition effectué, on va pouvoir s'intéresser aux outils existant permettant de réaliser chacune des tâches. On va noter leurs points faibles et leurs point forts ainsi que la manière dont ils sont censés être utilisés.
+
+\section{Ingestion/Extraction de données}
+
+La première catégorie, qui est aussi la première étape d'une architecture Big Data, c'est le récupération de données. Plus précisément comment nous allons récupérer des données, soit via des requêtes sur des sources externes, soit des sources externes nous envoie directement des données.
+
+\subsection{Avec système de messaging}
+
+\subsubsection{Kafka}
+
+\subsubsection{ActiveMQ}
+
+\subsubsection{RabbitMQ}
+
+\subsection{Sans système de messaging}
+
+\section{Traitement des données}
+
+Une fois les données reçu, des traitements sont nécessaire afin de pouvoir stocker les données au format souhaité ou bien pour faire un tri des données utiles.
+
+\subsection{Visuel}
+
+\subsubsection{Apache Nifi}
+
+\subsubsection{Talend}
+
+\subsection{Non visuel}
+
+\subsubsection{Streaming}
+
+\paragraph{Spark Streaming}
+
+\subsubsection{Micro Batch}
+
+\paragraph{Outil}
+
+\subsubsection{Batch}
+
+\paragraph{Spark}
+
+\paragraph{MapReduce}
+
+\section{Stockage des données}
+
+Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite.
+
+\subsection{Time Series}
+
+\subsubsection{OpenTSDB}
+
+\subsubsection{InfluxDB}
+
+\subsection{Graph}
+
+\subsubsection{Neo4j}
+
+\subsubsection{JanusGraph}
+
+\subsection{Données Structurées}
+
+\subsubsection{Hive}
+
+\subsubsection{Second outil}
+
+\subsection{Clé-Valeur}
+
+\subsubsection{HBase}
+
+\subsubsection{Redis}
+
+\subsection{Index}
+
+\subsubsection{ElasticSearch}
+
+\subsubsection{Apache Solr}
+
+\section{Requêtage}
+
+\subsection{Visuel}
+
+\subsubsection{Kibana}
+
+\subsubsection{Banana}
+
+\subsubsection{Grafana}
+
+\subsubsection{Tableau}
+
+\subsection{Non visuel}
+
+\subsubsection{OLAP}
+
+\paragraph{Outil}
+
+\subsubsection{OLTP}
+
+\paragraph{Outil}

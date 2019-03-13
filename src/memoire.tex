@@ -65,6 +65,11 @@
 
 \newenvironment{acknowledgements} {\renewcommand\abstractname{Remerciements}\begin{abstract}} {\end{abstract}}
 
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+
 %----------------------------------------------------------------------------------------
 %	INFORMATIONS
 %----------------------------------------------------------------------------------------
@@ -93,7 +98,7 @@
     \textsc{\Large Mémoire de fin d'études}\\[1.5cm]
 
     \HRule \\[0.4cm]
-    { \huge \bfseries Méthodes pour bien choisir son architecture Big Data en fonction des ses besoins\\[0.4cm] }
+    { \huge \bfseries Méthodes pour bien choisir son architecture Big Data en fonction de son processus métier\\[0.4cm] }
 
     \HRule \\[2cm]
     \includegraphics[scale=0.40]{img/logo_nanterre.jpg}
@@ -111,10 +116,22 @@
       \end{flushright}
     \end{minipage}
     \vfill
-    {\large Janvier 2019 — Juin 2019}
+    {\large Février 2019 — Juin 2019}
   \end{center}
   \end{sffamily}
 \end{titlepage}
+
+\leavevmode\thispagestyle{empty}\newpage
+
+%----------------------------------------------------------------------------------------
+%	Remerciement
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+
+Remerciements
+
+\end{acknowledgements}
 
 \leavevmode\thispagestyle{empty}\newpage
 
@@ -128,17 +145,13 @@
 
 \leavevmode\thispagestyle{empty}\newpage
 
-% \subfile{cover/remerciements}
-
 %----------------------------------------------------------------------------------------
-%	Remerciement
+%	Pre Face
 %----------------------------------------------------------------------------------------
 
-\begin{acknowledgements}
+\section*{Motivations}
 
-Remerciements
-
-\end{acknowledgements}
+\section*{Objectifs}
 
 \leavevmode\thispagestyle{empty}\newpage
 
@@ -162,6 +175,8 @@ Remerciements
 \subfile{chapitres/chapitre2}
 
 \subfile{chapitres/chapitre3}
+
+\subfile{chapitres/chapitre4}
 
 %----------------------------------------------------------------------------------------
 %	ANNEXES
