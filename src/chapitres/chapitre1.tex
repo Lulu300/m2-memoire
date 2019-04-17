@@ -49,7 +49,7 @@ De manière générale, on peut pas forcément se permettre de n'utiliser que l'
 
 \subsection{Architecture Lambda}
 
-L'architecture Lambda a été crée dans le but de pouvoir à la fois traiter des données en batch et en streaming. Plus précisément, 
+L'architecture Lambda a été crée dans le but de pouvoir à la fois traiter des données en batch et en streaming. Plus précisément, l'architecture lambda est composé de deux couches afin de gérer à la fois les batch et le streaming. Une couche est dédié pour traiter les données par batch, pour ensuite les rendre disponible (Ce qui est appelé une "view"). L'autre couche, s'occupe du streaming. Et à chaque donnée traitée, le résultat est mis à disposition. Grâce à ce fonctionnement lorsque l'on souhaite faire une requête, elle va pouvoir prendre en compte nos données récupérées par batch et par streaming.
 
 \begin{figure}[!h]
 	\centering 
@@ -59,6 +59,8 @@ L'architecture Lambda a été crée dans le but de pouvoir à la fois traiter de
 \end{figure}
 
 \subsection{Architecture Kappa}
+
+L'architecture Kappa, se veut plus "simple". Le but étant de traiter toutes les données en streaming. Cela a pour conséquence de n'avoir qu'une seule couche contrairement aux deux nécessaire pour l'architecture Lambda. Mais cela ne permet pas de remplacer l'architecture Lambda, en effet il faut que les données que l'on récupère en Batch et la manière dont elles sont stockées, permettent de les traiter en streaming par la suite.
 
 \begin{figure}[!h]
 	\centering 
