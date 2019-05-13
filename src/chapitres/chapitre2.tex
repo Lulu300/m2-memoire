@@ -4,11 +4,7 @@
 
 Une fois nos critères définit, il faut décomposer le Big Data qui est un domaine très vaste, en plusieurs catégories~\cite{BIGDATA_OVERALL}. Une fois cette décomposition effectué, on va pouvoir s'intéresser aux outils existant permettant de réaliser chacune des tâches. On va noter leurs points faibles et leurs point forts ainsi que la manière dont ils sont censés être utilisés.
 
-\section{Ingestion/Extraction de données}
-
-La première catégorie, qui est aussi la première étape d'une architecture Big Data, c'est le récupération de données. Plus précisément comment nous allons récupérer des données, soit via des requêtes sur des sources externes, soit des sources externes nous envoie directement des données.
-
-\subsection{Avec système de messaging}
+\section{Système de Messaging}
 
 \subsubsection{Kafka}
 
@@ -16,33 +12,30 @@ La première catégorie, qui est aussi la première étape d'une architecture Bi
 
 \subsubsection{RabbitMQ}
 
-\subsection{Sans système de messaging}
+\section{Ingestion/Extraction de données}
+
+La première catégorie, qui est aussi la première étape d'une architecture Big Data, c'est le récupération de données. Plus précisément comment nous allons récupérer des données, soit via des requêtes sur des sources externes, soit des sources externes nous envoie directement des données.
+
+\subsection{VertX}
+
+\subsection{Akka}
 
 \section{Traitement des données}
 
 Une fois les données reçu, des traitements sont nécessaire afin de pouvoir stocker les données au format souhaité ou bien pour faire un tri des données utiles.
 
-\subsection{Visuel}
+\subsection{Spark Streaming}
 
-\subsubsection{Apache Nifi}
+\subsection{Spark}
 
-\subsubsection{Talend}
+\subsection{MapReduce}
 
-\subsection{Non visuel}
 
-\subsubsection{Streaming}
+\section{ETL}
 
-\paragraph{Spark Streaming}
+\subsection{Apache Nifi}
 
-\subsubsection{Micro Batch}
-
-\paragraph{Outil}
-
-\subsubsection{Batch}
-
-\paragraph{Spark}
-
-\paragraph{MapReduce}
+\subsection{Talend}
 
 \section{Stockage des données}
 
@@ -80,22 +73,18 @@ Une partie très importante du Big Data est le stockage des nombreuses données 
 
 \section{Requêtage}
 
-\subsection{Visuel}
+\subsection{Kibana}
 
-\subsubsection{Kibana}
+\subsection{Banana}
 
-\subsubsection{Banana}
+\subsection{Grafana}
 
-\subsubsection{Grafana}
+\subsection{Tableau}
 
-\subsubsection{Tableau}
+\subsection{OLAP}
 
-\subsection{Non visuel}
+\subsubsection{Outil}
 
-\subsubsection{OLAP}
+\subsection{OLTP}
 
-\paragraph{Outil}
-
-\subsubsection{OLTP}
-
-\paragraph{Outil}
+\subsubsection{Outil}
