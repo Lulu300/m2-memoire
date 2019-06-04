@@ -2,7 +2,7 @@
 
 \chapter{Analyse des solutions logicielles existantes}
 
-Une fois nos critères définit, il faut décomposer le Big Data qui est un domaine très vaste, en plusieurs catégories~\cite{BIGDATA_OVERALL}. Une fois cette décomposition effectué, on va pouvoir s'intéresser aux outils existant permettant de réaliser chacune des tâches. On va noter leurs points faibles et leurs point forts ainsi que la manière dont ils sont censés être utilisés.
+Maintenant que nous avons vu les différentes architecture Big Data existantes et que nous les avons décomposés, on va s'intéresser plus en détail à chaque composant de ces architecture. Pour chaque composant, nous allons présenter diverses solutions existantes permettant de remplir le rôle de ce dernier. Pour chacune de ses solutions, nous allons voir leurs avantages et inconvénients et leurs manière de fonctionner dans le but de pouvoir en dégager des critères de sélections.
 
 \section{Message Broker}
 
@@ -38,17 +38,50 @@ La première catégorie, qui est aussi la première étape d'une architecture Bi
 
 \subsection{Talend}
 
+\subsection{Solution maison}
+
+
 \section{Traitement des données}
 
-Une fois les données reçu, des traitements sont nécessaire afin de pouvoir stocker les données au format souhaité ou bien pour faire un tri des données utiles.
+Après avoir récupérer des données, nous devons passer à l'étape du traitements des données. Celui ci à plusieurs rôles, en effet il peut servir à formater les données, leurs apportés de la cohérence en les combinant à des données déjà présentent. Et pour finir les rediriger vers le stockage souhaité. Le traitement des données peut se faire de deux manière différentes. La première solution est le traitement par Batch, et la seconde est le traitement en temps réel~\cite{TYPE_TRAITEMENT_DONNEES}. Chacune possède ses avantages et inconvénients, nous allons voir ça plus en détails.
 
 \subsection{Batch}
+
+Le traitement par Batch (Traitement par lot), consiste à traiter un important volume de données à un instant T. Le traitement par batch est surtout utilisé dans les cas ou nous avons des données stockés de manière journalière, et que nous avons besoin de tout traités en fin de journée. Il n'est pas rare de voir des tâches de traitements par Batch s'exécuter dans la nuit, étant donnée que l'on traite une masse de donnée importante, on sollicite la machine pendant une longue période. Réaliser ce traitement durant des périodes creuses, permet de largement diminuer l'impact sur l'utilisation de la plateforme (\ref{traitement-batch}).
+
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.50]{img/batch-processing.png}
+	\caption{Schéma du traitement par batch}
+	\label{traitement-batch}
+\end{figure}
+
+Nous allons nous pencher sur les solutions existantes, implémentant un traitement par batch.
 
 \subsubsection{Spark}
 
 \subsubsection{Hadoop MapReduce}
 
 \subsection{Streaming}
+
+Un traitement de données est considéré comme étant en temps réel si il s'effectue en une seconde ou moins après la réception de la donnée. Il peut être de deux types, soit des micro batchs soit en streaming.
+
+\subsubsection*{Micro-Batch}
+
+Le traitement par micro batch est basé sur le même principe que le traitement par batch, à l'exception qu'il s'exécute beaucoup plus régulièrement (Toutes les secondes ou moins) et que le nombre de données à traiter est donc significativement plus faible. Le micro batch est surtout utilisé dans les cas où notre système ne peut pas directement réagir lorsqu'une donnée arrive, on va donc récupérer les données très régulièrement afin de garantir un traitement en temps réel ou du moins dans le délai le plus bref possible.
+
+\subsubsection*{Streaming}
+
+Le traitement en streaming (Traitement de flux), s'appuie sur l'architecture réactive ({\ref{a:architecture-reactive}}). En effet, contrairement aux traitements par batch et micro batch, ici on ne vas pas récupérer des données de temps en temps. Dès qu'une donnée arrive on va la récupérer et la traiter immédiatement. De par son fonctionnement, le traitement en streaming ne nécessite pas de stockage en amont contrairement aux autres type de traitement (\ref{traitement-streaming}).
+
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.50]{img/stream-processing.png}
+	\caption{Schéma du traitement en streaming}
+	\label{traitement-streaming}
+\end{figure}
+
+Nous allons maintenant nous intéresser aux différentes solutions proposant ce type de traitement.
 
 \subsubsection{Spark Streaming}
 
@@ -95,6 +128,9 @@ Une partie très importante du Big Data est le stockage des nombreuses données 
 
 \subsubsection{Hadoop HDFS}
 
+\section{Orchestration}
+
+\section{Requetâge}
 
 \section{Visualisation et Analyse des données}
 

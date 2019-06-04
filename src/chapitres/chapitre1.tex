@@ -3,12 +3,12 @@
 \chapter{Les architectures Big Data}
 
 Une architecture Big Data est un regroupement d'outils permettant de gérer des données de leurs ingestion à leurs mise en valeur via des analyses.
-Il faut savoir qu'il existe plusieurs architectures dans le domaine du Big Data, et qu'elles répondent à des besoins différents. Nous allons nous intéresser aux trois architectures les plus importantes, étant donné que les autres sont des dérivées des trois architectures principales. Avant de voir en détail ces trois architectures, nous allons voir de manière plus générale les différents composants qui peuvent se retrouver dans des architectures Big Data~\cite{ARCH_DATA}.
+Il faut savoir qu'il existe plusieurs architectures dans le domaine du Big Data, et qu'elles répondent à des besoins différents. Nous allons nous intéresser aux trois architectures les plus importantes, étant donné que les autres sont des dérivées des trois architectures principales. Avant de voir en détail ces trois architectures, nous allons voir de manière plus générale les différents composants qui peuvent se retrouver dans des architectures Big Data~\cite{ARCH_DATA}\cite{BIGDATA_OVERALL}.
 Les différents composants pouvant se retrouver dans une architecture Big Data sont illustrés sur la figure \ref{composants-architecture-big-data}.
 
 \begin{figure}[!h]
 	\centering 
-	\includegraphics[scale=0.40]{img/big-data-comp.png}
+	\includegraphics[scale=0.58]{img/big-data-comp.png}
 	\caption{Composants d'une architecture Big Data}
 	\label{composants-architecture-big-data}
 \end{figure}
@@ -23,23 +23,27 @@ Nous allons maintenant détailler le rôle de chaque composant présenté dans l
 \item Des sources de données en temps réel, par exemple des données de capteurs récupérés via des appareils IoTs.
 \end{itemize}
 
-\item \textbf{Stockage des données :} Une solution de stockage de données est indispensable dans le cas de traitement des données par lot ({\ref{a:traitement-donnees-batch}}), et peut s'avérer utile lors de traitements des données en temps réel ({\ref{a:traitement-donnees-real-time}}) si l'on souhaite conserver les données reçu en plus de les traiter. Le deuxième cas ou un stockage de donnée puet être utile pour le traitement en temps réel, est si l'on a besoin d'agréger des données statiques avec les données en temps réel. Ces solutions de stockage doivent être capable de gérer divers formats de données, et surtout ils doivent être distribués ({\ref{a:architecture-repartie}}).
+\item \textbf{Ingestion des données :} La solution doit être capable d'aller chercher directement les données dans les différentes sources. Il est possible que les données soient directement envoyées dans la chaîne de traitement des données, mais c'est rarement le cas. Afin d'aller récupérer les données à la source, il y a plusieurs solutions. On peut écrire un programme permettant d'extraire les données. Cette solution est la plus efficace si le programme répond bien aux contraintes du Big Data, c'est à dire, il faut qu'il soit le plus réactif possible et le plus facilement adaptable aux flux de données entrant (Architecture réactive {\ref{a:architecture-reactive}}). La seconde solution la solution la plus simple, est l'utilisation d'un ETL (Extract Transform Load). C'est un outil graphique permettant de configurer l'extraction des données et leurs insertions dans la chaîne de traitements ou dans la solution de stockage. Néanmoins, cette solution est plus gourmande que l'écriture d'un programme car elle doit être capable de gérer énormément de sources et d'opérations différentes.
 
 \item \textbf{Traitement par lot ({\ref{a:traitement-donnees-batch}}) :} Les jeux de données étant trop lourd lors d'un traitement par lots, il est nécessaire de pouvoir exécuter une tâche de traitement de longue durée afin de filtrer, agréger et préparer les données en vue de leur analyse. En général, ce genre de traitement implique une lecture de fichier source et une écriture dans des nouveaux fichiers. Le traitement des données peut s'effectuer par des programmes java, scala ou Python ou encore via des outils spécialisé comme MapReduce ou Spark.  
 
-\item \textbf{Ingestion de messages en temps réel : } Si la solution doit interagir avec des sources de données en temps réel, l'architecture doit impérativement implémenter un moyen de récupérer ces données et de les stocker temporairement dans une file d'attente afin de pouvoir les temporiser. Cela permet d'éviter la perte de données entrante, et permet d'envoyer les données à la solution de traitement quand elle est disponible et de ne pas la surcharger. Généralement on utilise des messages brokers pour ce genre de tâches.  
+\item \textbf{Ingestion des données en temps réel : } Si la solution doit interagir avec des sources de données en temps réel, l'architecture doit impérativement implémenter un moyen de récupérer ces données et de les stocker temporairement dans une file d'attente afin de pouvoir les temporiser. Cela permet d'éviter la perte de données entrante, et permet d'envoyer les données à la solution de traitement quand elle est disponible et de ne pas la surcharger. Généralement on utilise des messages brokers pour ce genre de tâches.  
 
-\item \textbf{Traitement de flux ({\ref{a:traitement-donnees-real-time}}) :} Une fois les données récupérées, elles doivent être filtrées, agrégées puis préparer pour l'analyse.
+\item \textbf{Traitement de flux ({\ref{a:traitement-donnees-real-time}}) :} Une fois les données récupérées, elles doivent être filtrées, agrégées puis préparer pour l'analyse. le traitement est similaire au traitement par lot, seul les outils sont différents, car ils doivent être capable de gérer le traitements en temps réel.
 
-\item \textbf{Magasin de données analytique : } 
+\item \textbf{Stockage des données :} Une solution de stockage de données est indispensable dans le cas de traitement des données par lot ({\ref{a:traitement-donnees-batch}}), et peut s'avérer utile lors de traitements des données en temps réel ({\ref{a:traitement-donnees-real-time}}) si l'on souhaite conserver les données reçu en plus de les traiter. Le deuxième cas ou un stockage de donnée puet être utile pour le traitement en temps réel, est si l'on a besoin d'agréger des données statiques avec les données en temps réel. Ces solutions de stockage doivent être capable de gérer divers formats de données, et surtout ils doivent être distribués ({\ref{a:architecture-repartie}}).
 
-\item \textbf{Analyse, rapports et visualisation des données :} 
+\item \textbf{Requêtage : } Afin de pouvoir fournir les données stockées aux outils d'analyse et de visualisation, l'utilisation d'un outil de requetâge peut être requis. Dans certains cas votre base de données et votre outil de visualisation communiquerons directement entre eux, mais dans d'autre cas vous aurez besoin d'utiliser un outil de requetâge afin de fournir les données au bon format et de pouvoir faire une sélection des données à envoyer à l'outil.
 
-\item \textbf{Orchestration : } La majorité des solutions Big Data consistent a effectuer des traitements de données répétés, ayant pour but de transformer les données sources, les déplacer entre plusieurs endroits et les envoyer dans un magasin de données analytique ou bien les envoyer directement à un outil d'analyse.
+\item \textbf{Analyse et visualisation des données :} La dernière étape dans une architecture Big Data est la visualisation/analyse des données. la plupart des solutions Big Data ont pour but de faire de la valorisation de données et de fournir au minimum une visualisation des données et au mieux d'effectuer des analyses dessus. Cela peut se faire par l'écriture de rapport ou bien par application d'algorithme afin de détecter et de montrer différentes corrélation entre des données par exemple. Le but principal d'avoir une visualisation intelligente et facilement compréhensible de données étant à la base illisible par l'homme.
+
+\item \textbf{Orchestration : } La majorité des solutions Big Data consistent a effectuer des traitements de données répétés, ayant pour but de transformer les données sources puis de les stocker ou bien les envoyer directement à un outil d'analyse ou de visualisation des données. Il est donc important d'avoir un outil permettant de paramétrer les différentes actions que l'on souhaite effectuer sur nos données
 
 \end{itemize}
 
 \section{Architecture Data Lake}
+
+
 
 \section{Architecture Lambda}
 
