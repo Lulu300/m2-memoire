@@ -26,6 +26,22 @@ La communication point à point est la forme la plus simple de Producteur/Consom
 
 \subsection{Kafka}
 
+Apache Kafka~\cite{KAFKA}\cite{KAFKA2} est un système de messages distribué. Ce dernier est open source et sous licence Apache. Il a été placé sous la bannière open source par Linkedin qui continue à contribuer à son développement.
+
+Kafka utilise le système de communication du Publisher / Subscriber.
+Kafka est un cluster constitué de Brokers. Un broker est une instance d'un serveur Kafka.
+Il est donc facile de se constituer un cluster Kafka en instanciant les services Kafka.
+Cette gestion en cluster permet d’améliorer le partitionnement et la réplication des données.
+
+Le partitionnement est important lorsque le volume de données va augmenter.
+En utilisant un double partitionnement sur un Topic, on pourra augmenter le "débit" de lecture des messages en rajoutant un consommateur. Un consommateur s'occupera donc d'une partition d'un Topic. Cela permet aussi de facilement mettre à l'échelle Kafka si le nombre de message augmente ou si on veut accélérer le traitement.
+
+Afin de gérer le cluster, kafka se base sur Apache Zookeeper~\cite{ZOOKEEPER} (très utilisé dans les systèmes distribués). Pour faire simple, Zookeeper permet de savoir quel service est où. Kafka , a juste à lui demandé à quel endroit est situé un certain brooker.
+
+L'un des atout de Kafka, c'est qu'il stocke les messages.
+Ce stockage est basé sur un structure de données appelé : \textbf{LOG}.
+Ce format n'a rien à voir avec les logs applicatifs, il s’agit d’un tableau de messages ordonnés. L'ordonnancement est réalisé à partir de la date d'arrivée du message. Chaque message se voit donner un index, dans Kafka on appel cela un offset.
+
 \subsection{ActiveMQ}
 
 \subsection{RabbitMQ}
