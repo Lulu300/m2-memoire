@@ -173,3 +173,8 @@ Nous allons maintenant voir à partir de tout ce qu'on a vu de cette architectur
 \item Pas de séparation entre les besoins (Temps réel et traitements par lots).
 \item L'absence de couche de traitement par lots peut entraîner des erreurs lors du traitement des données ou lors de la mise à jour de la base de données.
 \end{itemize}
+
+$\ $\\
+$\ $\\
+
+Pour conclure sur ces deux architectures, l'architecture Lambda est beaucoup plus complète que l'architecture Kappa mais cela au prix d'une complexité accrue. De nombreux cas d'utilisation en temps réel conviendront parfaitement à une architecture Lambda. On ne peut pas en dire autant de l'architecture Kappa. Dans des cas où le traitement des données par lots et en temps réel sont similaire, ou bien, si le but est principalement de fournir des données métiers aux clients, l'utilisation de l'architecture Kappa est une bonne solution. Par contre dans les cas où les traitements de données en temps réel et par lots sont complètement différents ou bien si vous avez besoin d'utiliser des modèles d'apprentissage automatique afin de faire de la prédiction sur les évènements à venir, l'architecture Lambda est le meilleur choix.
