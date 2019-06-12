@@ -2,21 +2,49 @@
 
 \chapter{Critères d'analyse}
 
-Maintenant que nous sommes familier avec les architectures Big Data ainsi qu'avec les différentes solutions logicielle, nous allons pouvoir définir des critères afin de sélectionner l'architecture qui correspond à notre besoin. Certains critères ont déjà été dégagé au fil de ce mémoire. La première étape va être de définir des critères par rapport au choix de l'architecture et ensuite des critères pour choisir les solution logicielles à utiliser au sein de cette architecture. En plus des différentes informations que nous avons exposé jusqu'ici, nous aurons besoin de prendre en compte le cas d'utilisation nécessitant le déploiement d'une architecture Big Data. 
+Maintenant que nous sommes familier avec les architectures Big Data ainsi qu'avec les différentes solutions logicielle, nous allons pouvoir définir des critères afin de sélectionner l'architecture qui correspond à notre besoin. Certains critères ont déjà été dégagé au fil de ce mémoire. La première étape va être de définir des critères par rapport au choix de l'architecture et ensuite des critères pour choisir les solution logicielles à utiliser au sein de cette architecture. En plus des différentes informations que nous avons exposé jusqu'ici, nous aurons besoin de prendre en compte le cas d'utilisation nécessitant le déploiement d'une architecture Big Data. Dans un premier temps, nous allons nous intéresser ce la manière dont les entreprises effectuent leurs choix d'architecture.
+
+\section{Sélection d'architecture en entreprise}
+
+
 
 \section{Critères pour le choix de l'architecture}
 
 Avant de voir les différent critères par rapport au choix de l'architecture, je tiens à rappeler ce qui a été expliquer en introduction de ce mémoire, c'est qu'avant de passer sur une architecture Big Data il faut s'assurer d'en avoir l'utilité.
 
+Nous allons exposer les critères ainsi que leur solution adapté sous la forme d'un tableau afin de permettre une visualisation simple pour effectuer notre choix.
+
+\begin{tabular}{|p{10cm}|p{2.5cm}|} 
+  \hline
+  Critère & Architecture \\
+  \hline
+  Prédiction d'évènement entrant à l'aide de modèle d'apprentissage automatique & Lambda \\
+  \hline
+  Traitement des données en temps réel et par lots radicalement différents & Lambda \\
+  \hline
+  Traitement des données par lots complexe & Lambda \\
+  \hline
+  Très faible latence entre récupération et affichage des données & Kappa \\
+  \hline
+  Traitement des données par lots et en temps réel similaires & Kappa \\
+  \hline
+\end{tabular}
 
 
-\section{Type de traitement des données}
-Streaming - Micro Batch - Batch
+\section{Critères pour le choix des solutions logicielles}
 
-\section{Format des données}
+\subsection{Ingestion des données}
 
-\section{Perte de données admissible}
+\subsection{Message Broker}
 
-\section{Volumétrie}
+\subsection{Traitement des données}
 
-\section{Performance}
+\subsection{Stockage des données}
+
+\subsection{Moteur d'indexation}
+
+\subsection{Orchestration}
+
+\subsection{Visualisation et Analyse des données}
+
+\section{Aller plus loin}

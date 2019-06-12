@@ -50,16 +50,24 @@ Ce format n'a rien à voir avec les logs applicatifs, il s’agit d’un tableau
 
 La première catégorie, qui est aussi la première étape d'une architecture Big Data, c'est le récupération de données. Plus précisément comment nous allons récupérer des données, soit via des requêtes sur des sources externes, soit des sources externes nous envoie directement des données. 
 
+Il existe deux approches afin d'effectuer cette tâche, soit l'utilisation d'un logiciel appelé ETL ou ELT ou bien, l'écriture de programme. Un logiciel ETL (Extract Transform \& Load) ou ELT (Extract Load \& Transform), sont des solutions permettant d'extraire des données depuis des sources, appliquer une transformation sur ces données et enfin les charger dans une solution de stockage. En plus d'être solution complète, la gestion du flux des données est entièrement paramétrable à l'aide d'une interface graphique afin de faciliter l'utilisation de ces outils. La distinction entre ETL et ELT est l'ordre dans lequel les opérations sont effectués, soit les données sont d'abord transformés puis stockés (ETL) soit l'inverse (ELT). 
+Les deux premières solutions que nous allons aborder pour répondre à la problématique de l'ingestion des données sont des ETL/ELT.
+
 \subsection{Apache Nifi}
 
 \subsection{Talend}
 
 \subsection{Solution maison}
 
+Il est aussi tout à fait possible d'envisager d'écrire un programme simple permettant d'extraire des données des données depuis une source pour ensuite les injecter dans une base et lancer le traitement des données. Pour nous aider dans cette tâche, il existe dans une majorité des langages des connecteurs permettent d'interagir par exemple avec des bases de données. Toutefois, il est important de respecter certains critères avant de se lancer dans le développement d'un programme maison. Comme on l'a vu tout au long de notre recherche, l'un des points clés du Big Data est sa capacité de mise à l'échelle. Il faut donc choisir le langage et/ou un framework pouvant lui aussi être mis à l'échelle facilement, c'est à dire qu'il doit adopté une architecture réactive ({\ref{a:architecture-reactive}}). Deux frameworks très connu utilisant cette architecture sont Akka et Vert.x. Akka utilise le principe de concurrence Acteur tandis que Vert.x utilise le principe d'évènements. Akka supporte officiellement Java et Scala et on peut facilement l'utiliser avec d'autres langages de la JVM\footnote{Machine virtuelle java}. De son côté, Vert.x supporte de manière officielle Java, Scala, Kotlin, Javascript, Ruby et Ceylon. Il existe des modules pour Vert.x permettant de supporter d'autres langages comme le python par exemple mais il ne sont pas maintenu par Vert.x.
+
+\subsection*{Conclusion}
+
+Pour conclure sur cette partie, nous avons donc le choix d'utiliser des solutions complètes configurable facilement, ou bien écrire nous même un programme réalisant l'ingestion des données. L'utilisation d'une solution complète peut paraître la plus attractive mais elle est plus consommatrice en ressources qu'un simple en programme.
 
 \section{Traitement des données}
 
-Après avoir récupérer des données, nous devons passer à l'étape du traitements des données. Celui ci à plusieurs rôles, en effet il peut servir à formater les données, leurs apportés de la cohérence en les combinant à des données déjà présentent. Et pour finir les rediriger vers le stockage souhaité. Le traitement des données peut se faire de deux manière différentes. La première solution est le traitement par Batch, et la seconde est le traitement en temps réel~\cite{TYPE_TRAITEMENT_DONNEES}. Chacune possède ses avantages et inconvénients, nous allons voir ça plus en détails.
+Après avoir récupérer des données, nous devons passer à l'étape du traitements des données. Celui ci à plusieurs rôles, en effet il peut servir à formater les données, leurs apportés de la cohérence en les combinant à des données déjà présentent. Et pour finir les rediriger vers le stockage souhaité. Le traitement des données peut se faire de deux manière différentes. La première solution est le traitement par Batch, et la seconde est le traitement en temps réel~\cite{TYPE_TRAITEMENT_DONNEES}\cite{TYPE_TRAITEMENT_DONNEES2}. Chacune possède ses avantages et inconvénients, nous allons voir ça plus en détails.
 
 \subsection{Batch}
 
@@ -125,6 +133,12 @@ Une partie très importante du Big Data est le stockage des nombreuses données 
 \subsubsection{Redis}
 
 \subsubsection{RocksDB}
+
+\subsection{Moteur d'indexation}
+
+\subsubsection{ElasticSearch}
+
+\subsubsection{Solr}
 
 \subsection{Documents}
 
