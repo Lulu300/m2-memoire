@@ -16,7 +16,7 @@ Dans ce mécanisme, l'entité envoyant les données est nommé "Publisher" et l'
 \begin{figure}[!h]
 	\centering 
 	\includegraphics[scale=0.50]{img/producer_subscriber.png}
-	\caption{Schéma du principe Producer/Subscriber}
+	\caption{Schéma du principe Publisher(Producer)/Subscriber}
 	\label{Lambda}
 \end{figure}
 
@@ -26,25 +26,37 @@ La communication point à point est la forme la plus simple de Producteur/Consom
 
 \subsection{Kafka}
 
-Apache Kafka~\cite{KAFKA}\cite{KAFKA2} est un système de messages distribué. Ce dernier est open source et sous licence Apache. Il a été placé sous la bannière open source par Linkedin qui continue à contribuer à son développement.
+Apache Kafka~\cite{KAFKA}\cite{KAFKA2} est un système de messages distribué, développé par Linkedin.
 
-Kafka utilise le système de communication du Publisher / Subscriber.
-Kafka est un cluster constitué de Brokers. Un broker est une instance d'un serveur Kafka.
-Il est donc facile de se constituer un cluster Kafka en instanciant les services Kafka.
-Cette gestion en cluster permet d’améliorer le partitionnement et la réplication des données.
+Kafka utilise le système communication du Publisher(Producer) / Subscriber en utilisant un élément unique, appelé broker. Afin de faciliter la mise à l'échelle et le partitionnement des données, il est possible d'instancier autant que broker que l'on souhaite afin d'augmenter le débit et la résilience du produit.
 
-Le partitionnement est important lorsque le volume de données va augmenter.
-En utilisant un double partitionnement sur un Topic, on pourra augmenter le "débit" de lecture des messages en rajoutant un consommateur. Un consommateur s'occupera donc d'une partition d'un Topic. Cela permet aussi de facilement mettre à l'échelle Kafka si le nombre de message augmente ou si on veut accélérer le traitement.
+Une autre brique est utilise par Kafka afin de gérer l'état des différents brokers, il s'agit de Apache ZooKeeper. Il permet de stocker facilement toutes les méta-données de chaque broker, comme par exemple le nombre de données injectées dans chaque topics, ou bien la répartition des différentes topics sur chaque broker (Voir figure {\ref{cluster-kafka}}.
 
-Afin de gérer le cluster, kafka se base sur Apache Zookeeper~\cite{ZOOKEEPER} (très utilisé dans les systèmes distribués). Pour faire simple, Zookeeper permet de savoir quel service est où. Kafka , a juste à lui demandé à quel endroit est situé un certain brooker.
+\begin{figure}[hbt!]
+	\centering 
+	\includegraphics[scale=0.50]{img/kafka_broker.png}
+	\caption{Schéma d'un cluster Kafka et des ces composants}
+	\label{cluster-kafka}
+\end{figure}
 
-L'un des atout de Kafka, c'est qu'il stocke les messages.
-Ce stockage est basé sur un structure de données appelé : \textbf{LOG}.
-Ce format n'a rien à voir avec les logs applicatifs, il s’agit d’un tableau de messages ordonnés. L'ordonnancement est réalisé à partir de la date d'arrivée du message. Chaque message se voit donner un index, dans Kafka on appel cela un offset.
+Les messages envoyés à Kafka sont stockés sur disque dans le format appelé \textbf{LOG}.
+Ce format n'a rien à voir avec les logs applicatifs, il s’agit d’un tableau de messages ordonnés. L'ordonnancement est réalisé à partir de la date d'arrivée du message. Chaque message se voit donner un index aussi appelé offset.
 
 \subsection{ActiveMQ}
 
+Comme Kafka, ActiveMQ utilise le système de communication Publisher(Producer) / Subscriber. L'intérêt principal d'ActiveMQ est de connecter différentes application réaliser avec des langages différents avec l'aide des API fournit.
+
+De la même manière que Kafka, il permet de se mettre à l'échelle très facilement mais il n'utilise pas de brique intermédiaire afin de gérer les états des brokers (ZooKeeper). Les différentes instances d'ActiveMQ utilise en système de multicast afin de se découvrir.
+
 \subsection{RabbitMQ}
+
+Contrairement à Kafka et ActiveMQ, RabbitMQ utilise le système de communication Point-to-Point. Cela permet de garantir qu'un seul consommateur vas être en mesure de lire le message présent dans la queue.
+
+RabbitMQ n'utilise pas de brique extérieure afin de gérer la mise à l'échelle, mais il suit le même mode de fonctionnement que ces deux concurrents, c'est à dire un système de partition.
+
+\subsection*{Conclusion}
+
+Nous pouvons constater que ces trois solutions se ressemblent, elle se se départagent uniquement sur quelques points. L'utilisation de différents protocoles, le mécanisme de communication ou bien la manière de se mettre à l'échelle. 
 
 \section{Ingestion/Extraction de données}
 
@@ -82,9 +94,21 @@ Le traitement par Batch (Traitement par lot), consiste à traiter un important v
 
 Nous allons nous pencher sur les solutions existantes, implémentant un traitement par batch.
 
-\subsubsection{Spark}
+\subsubsection{Apache Spark}
+
+Spark est un moteur de traitement de données distribué, il répond à de nombreux cas d'utilisation. En plus du moteur de traitement de données, Spark possède des librairies SQL, d'apprentissage automatique, de calcul des graphes ainsi que le traitement de flux qui sera abordé dans la partie {\ref{spark-streaming}} sur Spark Streaming. Spark supporte différents langages de programmation, Java, Scala, Python et R. 
+
+Spark à des performances accrue car entre chaque étape des calculs, au lieu de stocker les résultats sur disque il les garde en RAM.
 
 \subsubsection{Hadoop MapReduce}
+
+MapReduce est aussi un moteur de traitement de données distribué, mais il répond à de moins nombreux cas d'utilisation que son concurrent Spark. Il ne possède qu'une seule librairie permettant de faire de l'apprentissage automatique. Il manque donc de librairies  SQL, de calcul des graphes ainsi que de traitement de flux contrairement à son concurrent.
+
+Au niveau des performances, MapReduce se montre moins efficace que Spark. Là où Spark va stocker en RAM tout les résultats intermédiaire, MapReduce va stocker ces résultats sur disque. Cela a un impact non négligeable sur les performances, mais il permet aussi de diminuer les coûts de la plateforme et de garantir une meilleure tolérance à la panne.
+
+\subsubsection*{Conclusion}
+
+Ces deux solutions sont intéressantes, mais couvre des cas d'utilisation vraiment différents. Il est donc très important de bien cibler son besoin afin de faire le bon choix pour son architecture.
 
 \subsection{Streaming}
 
@@ -107,22 +131,65 @@ Le traitement en streaming (Traitement de flux), s'appuie sur l'architecture ré
 
 Nous allons maintenant nous intéresser aux différentes solutions proposant ce type de traitement.
 
-\subsubsection{Spark Streaming}
+\subsubsection{Apache Spark Streaming}
+\label{spark-streaming}
+
+Spark Streaming est comme on l'a vu précédemment une version de Spark étudié pour le traitement en temps réel. Il bénéficie donc du large choix de librairie de Spark. 
+
+Spark Streaming à une latence assez faible mais pas suffisamment pour s'orienter vers du traitement en streaming il est plus orienté pour un traitement en micro-batch.
+
+Spark Streaming s'avère très utile dans le cadre d'une architecture Lambda, comme on l'a vue dans cette architecture les traitements en batch et en temps réel sont effectués par des outils différents. Spark Streaming permet d'avoir la même base de code pour le traitement en bacth et en temps réel, cela permet d'éviter de la duplication de code et de pouvoir n'utiliser entre autre qu'un seul outil pour le traitement des données..
 
 \subsubsection{Apache Storm}
+
+Apache Storm propose une sélection moins importante de langage de programmation que Spark Streaming. Il ne propose que le Java, Scala et Clojure.
+
+Contrairement à Spark Streaming, Apache Storm possède une latence beaucoup plus faible ce qui lui permet de gérer le traitement en streaming sans aucun problème.
+
+Tout comme Spark Streaming, Apache Storm stock les résultats intermédiaires en RAM pour garantir des performances accrues.
+
+Apache Storm ne propose pas de librairie de calcul des graphes et n'a pas de librairie d'apprentissage automatique intégré, il faudra en installer une compatible contrairement à Spark Streaming.
+
+Apache Storm à l'opposé de son concurrent ne permet pas de garder la même base de code entre le traitement en batch et en streaming, son utilisation se place par conséquent plus dans le cadre d'une architecture Kappa.
+
+\subsubsection*{Conclusion}
+
+Malgré un mode de fonctionnement similaire, ces deux solutions peuvent se démarquer sur des points important qui nous permettra de définir des critères précis par rapport à leur utilisation.
 
 
 \section{Stockage des données}
 
-Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs format.
+Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs format. De plus l'utilisation de plusieurs bases de données est très courante, généralement une base de données est utilisé pour le stockage des données brutes avant leur traitements puis une autre base de données correspondant au nouveau format des données est utilisé pour améliorer les performances.
 
 \subsection{Time Series}
 
+La première catégorie de base de données que nous allons traiter, est la base de données de séries temporelles. Ce type de stockage est de plus en plus important avec l'explosion de l'IoT qui est un des domaine générant le plus de donnée de séries temporelles.
+
+Une série temporelle est tout simplement une valeur daté, par exemple la température d'un processeur à un instant T.
+
 \subsubsection{OpenTSDB}
+
+OpenTSDB est une base de données Open Source sous la licence GPL3 écrit en Java.
+
+Afin de stocker les données, OpenTSDB se base sur une autre base de données appelé HBase, nous verrons plus en détail HBase dans la partie {\ref{hbase}}. Cette solution implique donc que vous avez déjà HBase d'installer et d'avoir les connaissances nécessaire pour le configurer correctement afin de garantir des bon débit de lecture et d'écriture.
+
+OpenTSDB ne fournit pas d'outil de requêtage simplifié, il faut donc être familier avec HBase pour récupérer des données stockées dans OpenTSDB.
 
 \subsubsection{InfluxDB}
 
+InfluxDB est une solution Open Source développé par InfluxData sous la licence MIT et écrit en Go.
+
+Contrairement à OpenTSDB, InfluxDB n'utilise de solution externe pour le stockage des données. Ils possède sa propre solution optimisé pour les données de série temporelle. Cela à un double avantage. Premièrement, pas besoin d'installer une autre base de données et d'avoir les connaissances nécessaire pour la configurer pour des données de série temporelles. Cela permet aussi d'avoir des performances accrues, l'architecture de stockage étant crée dans le seul but de stocker des données de série temporelle, il est normal que les performances soient meilleures que pour une solution qui peut gérer plusieurs formats de données.
+
+Par rapport à son concurrent, InfluxDB propose une solution de requetâge de données simplifiant en utilisant le langage SQL.
+
+\subsubsection*{Conclusion}
+
+Nous pouvons constater que InfluxDB à l'air d'être la meilleure solution pour le stockage de série temporelle, mais le fait que OpenTSDB utilise HBase peut être un critère de choix pour certaines personnes pour le choix de leur architecture.
+
 \subsection{Graph}
+
+
 
 \subsubsection{Neo4j}
 
@@ -151,6 +218,7 @@ Une partie très importante du Big Data est le stockage des nombreuses données 
 \subsection{Wide Column}
 
 \subsubsection{HBase}
+\label{hbase}
 
 \subsubsection{Cassandra}
 

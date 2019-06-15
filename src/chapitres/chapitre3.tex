@@ -6,30 +6,35 @@ Maintenant que nous sommes familier avec les architectures Big Data ainsi qu'ave
 
 \section{Sélection d'architecture en entreprise}
 
-
+Cette partie sera entièrement basé sur mon expérience professionnel, je ne peux en aucun cas garantir que la sélection d'une architecture s'effectue de la même manière dans toutes les entreprises. 
 
 \section{Critères pour le choix de l'architecture}
 
 Avant de voir les différent critères par rapport au choix de l'architecture, je tiens à rappeler ce qui a été expliquer en introduction de ce mémoire, c'est qu'avant de passer sur une architecture Big Data il faut s'assurer d'en avoir l'utilité.
 
 Nous allons exposer les critères ainsi que leur solution adapté sous la forme d'un tableau afin de permettre une visualisation simple pour effectuer notre choix.
-
-\begin{tabular}{|p{10cm}|p{2.5cm}|} 
-  \hline
-  Critère & Architecture \\
-  \hline
-  Prédiction d'évènement entrant à l'aide de modèle d'apprentissage automatique & Lambda \\
-  \hline
-  Traitement des données en temps réel et par lots radicalement différents & Lambda \\
-  \hline
-  Traitement des données par lots complexe & Lambda \\
-  \hline
-  Très faible latence entre récupération et affichage des données & Kappa \\
-  \hline
-  Traitement des données par lots et en temps réel similaires & Kappa \\
-  \hline
-\end{tabular}
-
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Architecture} \\
+  	\hline
+  	Prédiction d'évènement entrant à l'aide de modèle d'apprentissage automatique & Lambda\\
+  	\hline
+  	Traitement des données en temps réel et par lots radicalement différents & Lambda \\
+  	\hline
+  	Traitement des données par lots complexe & Lambda \\
+  	\hline
+  	Très faible latence entre récupération et affichage des données & Kappa \\
+  	\hline
+  	Traitement des données par lots et en temps réel similaires & Kappa \\
+  	\hline
+  	Stockage permanent des données batch avant le traitement & Lambda/Kappa \\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de l'architecture}
+    \label{tab:critere-arch}
+\end{table}
 
 \section{Critères pour le choix des solutions logicielles}
 
