@@ -108,19 +108,72 @@ Comme on peut le constater, Kafka se démarque complètement de ses deux concurr
 
 \subsection{Traitement des données}
 
-Comme on l'a vue précédemment, il existe deux types de traitement de données, le traitement par lots et le traitement en temps réel. Pour choisir lequel de ces deux traitements correspond à votre cas d'utilisation, il suffit de voir quel architecture correspondait à vos critères dans la partie précédente. Si c'était l'architecture Kappa, vous aurez uniquement besoin d'une solution de traitement en temps réel, dans le cas contraire vous aurez besoin d'intégrer les deux types de traitements de données.
+Comme on l'a vu précédemment, il existe deux types de traitement de données, le traitement par lots et le traitement en temps réel. Pour choisir lequel de ces deux traitements correspond à votre cas d'utilisation, il suffit de voir quel architecture correspondait à vos critères dans la partie précédente. Si c'était l'architecture Kappa, vous aurez uniquement besoin d'une solution de traitement en temps réel, dans le cas contraire vous aurez besoin d'intégrer les deux types de traitements de données.
 
 \subsubsection{Traitement par lots}
 
+Regardons maintenant comment départager les deux solutions de traitement pas lots que nous avons étudié.
 
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'utiliser des librairies autres que le machine learning & Spark\\
+  	\hline
+  	Nécessité d'avoir des performances accrues & Spark\\
+  	\hline
+  	Nécessité d'avoir une tolérance à la panne exemplaire & MapReduce\\
+  	\hline
+  	Les performances ne sont pas la priorité & MapReduce\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \label{tab:critere-batch}
+\end{table}
+
+Spark est une solution qui va convenir dans le cadre ou des performances maximales sont nécessaires. Si jamais vous utilisé une architecture Kappa, l'utilisation de Spark peut être intéressante sur vous utilisez son petit frère pour le traitement de données en temps réel, cela vous permettra de garder une base de code commune entre vos différents traitements. MapReduce lui est intéressant dans le cas ou vous n'avez pas spécialement besoin de performances accrues et que vous préférez une solution moins complexe à mettre en place.
 
 \subsubsection{Traitement en temps réel}
 
+Le tableau {\ref{tab:critere-real-time}} présente les critères permettant de départager les deux solutions de traitements en temps réel que nous avons étudié, c'est à dire Apache Spark Streaming et Apache Storm.
 
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Source de données en micro batch & Spark Streaming\\
+  	\hline
+  	Source de données en streaming & Apache Storm\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \label{tab:critere-real-time}
+\end{table}
+
+Le choix entre ces deux solutions s'avère être assez évident. Néanmoins, si pour vous les langages mis à disposition par l'une des solutions ne vous convient pas, vous pouvez aisément vous tourner vers l'autre solution. Un autre critère à prendre en compte, que vous utilisiez une architecture Kappa ou Lambda, l'utilisation de Spark vous permettra d'avoir une base de code similaire entre vos traitements par lots et vos traitements en temps réel.
 
 \subsection{Stockage des données}
 
-Comme nous avons pu le constater, il existe de nombreuses base données dans le comaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker et/ou l'utilisation que l'on souhaite faire de ces données.
+Comme nous avons pu le constater, il existe de nombreuses base données dans le domaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker et/ou l'utilisation que l'on souhaite faire de ces données. Le tableau {\ref{tab:critere-storage-type}} détails les différents critères permettant de choisir le type de base de données à utiliser.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	 & Spark Streaming\\
+  	\hline
+  	Source de données en streaming & Apache Storm\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \label{tab:critere-storage-type}
+\end{table}
 
 \subsubsection{Base de données de séries temporelles}
 

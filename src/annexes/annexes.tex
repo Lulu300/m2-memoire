@@ -72,13 +72,18 @@ La mise à l'échelle verticale est certes la moins couteuse, mais ce n'est pas 
 
 \textbf{Message-Driven} :
 
-Le Message-Driven Architecture
+Le Message-Driven Architecture est la base d'une architecture réactive. Une application dirigée par message peut être dirigée par des évènements, par des acteurs ou par les deux.
 
+Un système déclenché par événement est basé sur des événements qui sont surveillés par zéro observateur ou plus. Les évènement ne pointent pas directement vers une destination en particulier, ils sont écoutés et les entités qui écoutent les évènements vont interagir lorsque qu'ils en ont détecter un.
+
+Un système dirigé par des acteurs est une extension de l'architecture de transmission de messages. Les messages sont envoyés à des destinataires précis, appelés acteurs. Les messages sont envoyés dans la boite aux lettres des acteurs, et seront traités dès que l'acteur aura du temps.
 
 \section{Architecture Répartie}
 \label{a:architecture-repartie}
 
-\section{Machine Learning}
-\label{a:machine-learning}
+
+Une architecture répartie ou bien un système distribué représente tout simplement une mise à l'échelle verticale. C'est à dire un groupe de machines travaillant ensemble, mais en donnant l'impression que ce n'est qu'une seule machine.
+
+Ces machines ont un état partagé, elles fonctionnent simultanément et peuvent tomber en panne indépendamment sans perturber le fonctionnement du reste du système. Cela peut permettre notamment d'attribuer facilement plus de ressource à une application lors d'une montée en charge.
 
 \end{appendices}

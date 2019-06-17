@@ -150,7 +150,21 @@ J'aimerais aussi remercier mes collègues d'EDF avec qui j'ai pu travailler dans
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
-	Résumé
+
+Le Big Data est de plus en plus présent aujourd'hui, et pourtant ce sujet reste trop vague pour un trop grand nombre de personnes qui se laisse aveugler par la popularité d'une technologie pour concevoir leur architecture Big Data.
+
+De plus certaines entreprises tentent le Big Data sans avoir de cas utilisation concret, cela engendre une architecture complexe et chère à maintenir alors qu'ils n’en ont nullement l'utilité.
+
+Dans un premier temps, nous allons brièvement rappeler ce qu'est le Big Data et montrer à partir de quand il est intéressant de l'utiliser.
+
+Dans un second temps, nous allons faire un état des lieux des composants qui composent une architecture Big Data et après nous allons nous intéresser aux différents modèles d'architectures Big Data existants.
+
+Ensuite, nous allons nous parcourir les différentes solutions logicielles intervenant dans les architectures Big Data que nous avons étudiées. Cela permettra d'analyser leur fonctionnement afin de trouver des critères de sélection.
+
+Dans une troisième partie, nous établirons les critères permettant de départager les différentes architectures Big Data ainsi que les différentes solutions logicielles permettant la réalisation de celles-ci.
+
+Finalement, nous définirons une manière d'évaluer notre choix d'architecture afin de vérifier que c'est bien la solution optimale.
+
 \end{abstract}
 
 \leavevmode\thispagestyle{empty}\newpage
@@ -160,13 +174,16 @@ J'aimerais aussi remercier mes collègues d'EDF avec qui j'ai pu travailler dans
 %----------------------------------------------------------------------------------------
 
 \section*{Motivations}
-Avant d'avoir commencer mon stage de Master 1 chez EDF dans le service Big Data, pour moi le Big Data était une notion très flou et je ne savais pas vraiment tout ce qui composait ce domaine. Durant ce stage j'ai pu découvrir ce domaine et me rendre compte du nombre conséquent d'outils différents qui sont nécessaire pour la conception d'une architecture Big Data complète. C'est à partir de ce moment là que je me suis demandé, comment est-ce que le choix de l'architecture, et des outils Big Data s'effectue ? Il y a beaucoup plus de possibilités que les domaines que j'ai pu voir jusqu'à maintenant. C'est pour cela que j'ai décidé cette année, d'essayer de comprendre comment fonctionne une architecture Big Data afin de trouver une solution pour choisir plus facilement une architecture Big Data adapté à nos besoins. 
+Avant d'avoir commencé mon stage de Master 1 chez EDF dans le service Big Data, pour moi le Big Data était une notion très floue et je ne savais pas vraiment tout ce qui composait ce domaine. Durant ce stage j'ai pu découvrir ce domaine et me rendre compte du nombre conséquent d'outils différents qui sont nécessaires pour la conception d'une architecture Big Data complète. C'est à partir de ce moment-là que je me suis demandé, comment est-ce que le choix de l'architecture, et des outils Big Data s'effectue ? Il y a beaucoup plus de possibilités que dans les domaines que j'ai pu voir jusqu'à maintenant. C'est pour cela que j'ai décidé cette année, d'essayer de comprendre comment fonctionne une architecture Big Data afin de trouver une solution pour choisir plus facilement une architecture Big Data adaptée à nos besoins. 
 
 \section*{Objectifs}
 
+À travers ce mémoire j'aimerais dans un premier temps vous rappeler ce que c'est que le Big Data. Le Big Data étant devenu à "la mode", je pense qu'il est important de rappeler ce que c'est exactement et quand il est intéressant de l'utiliser.
 
+Dans un second temps, je voudrais vous montrer à quel ce domaine est vaste et à quel point c'est important de se renseigner de manière régulière sur les nouveautés afin de ne pas faire un choix basé uniquement sur la popularité d'un outil. Il est important de faire soit même ses recherches sur les différents outils à notre disposition afin d'utiliser celui qui correspond le mieux à nos utilisations.
 
-Dans ce mémoire, nous allons dans un premier temps rappeler brièvement ce qu'est le Big Data et quand il est vraiment utile de l'utiliser. Dans un second temps, nous allons présenter de manière générale comment est constitué une architecture Big Data. Puis nous verrons plus en détails les architectures qui ont été crées pour répondre aux besoins du Big Data. Ensuite, nous détaillerons pour chaque partie de ces différentes architectures, les solutions logicielles existantes permettant d'accomplir la tâche demandée. Et pour finir, nous allons à partir des études des architectures et des solutions logicielles, essayer de définir un moyen permettant de sélectionner correctement l'architecture et les outils nécessaire pour la création d'une solution Big Data correspondant à nos besoins. Afin de tester que notre méthode de choix est cohérente, on l'appliquera sur une application réel et on la comparera aux autres possibilités d'architecture possible pour s'assurer que c'était le meilleur choix.
+Et pour finir, j'aimerais définir des critères permettant à partir d'un cas d'utilisation, de nous proposer la meilleure architecture Big Data.
+
 
 \leavevmode\thispagestyle{empty}\newpage
 
