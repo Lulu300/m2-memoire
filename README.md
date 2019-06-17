@@ -1,5 +1,5 @@
 # Mémoire de fin d'étude Master MIAGE
-**Méthodes pour bien choisir son architecture Big Data en fonction de son processus métier**
+**Méthodes d'analyse des processus métier pour le choix d'une architecture Big Data adaptée**
 
 Auteur : Ludwig SIMON
 

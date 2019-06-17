@@ -28,7 +28,7 @@ La communication point à point est la forme la plus simple de Producteur/Consom
 
 Apache Kafka~\cite{KAFKA}\cite{KAFKA2} est un système de messages distribué, développé par Linkedin.
 
-Kafka utilise le système communication du Publisher(Producer) / Subscriber en utilisant un élément unique, appelé broker. Afin de faciliter la mise à l'échelle et le partitionnement des données, il est possible d'instancier autant que broker que l'on souhaite afin d'augmenter le débit et la résilience du produit.
+Kafka utilise le système de communication du Publisher(Producer) / Subscriber en utilisant un élément unique, appelé broker. Afin de faciliter la mise à l'échelle et le partitionnement des données, il est possible d'instancier autant que broker que l'on souhaite afin d'augmenter le débit et la résilience du produit.
 
 Une autre brique est utilisée par Kafka afin de gérer l'état des différents brokers, il s'agit de Apache ZooKeeper. Il permet de stocker facilement toutes les métadonnées de chaque broker, par exemple le nombre de données injectées dans chaque topics, ou bien la répartition des différentes topics sur chaque broker (voir figure {\ref{cluster-kafka}}.
 
@@ -67,7 +67,7 @@ Les deux premières solutions que nous allons aborder pour répondre à la probl
 
 \subsection{Apache Nifi}
 
-Apache Nifi est une solution ETL/ELT open source sous la licence Apache 2.0 écrite en Java et développée par la fondation Apache. 
+Apache Nifi est une solution ETL/ELT open source sous la licence Apache 2 écrite en Java et développée par la fondation Apache. 
 
 Apache Nifi est tolérant aux pannes et peut être facilement mis à l'échelle avec l'aide de Apache Zookeeper~\cite{ZOOKEEPER}. Cela bien évidemment, implique d'avoir installé et configuré au préalable Zookeeper. 
 
@@ -85,7 +85,7 @@ Malheureusement, n'ayant pas assez d'informations pour Talend Open Studio, on ne
 
 \subsection{Solution maison}
 
-Il est aussi tout à fait possible d'envisager d'écrire un programme simple permettant d'extraire des données depuis une source pour ensuite les injecter dans une base et lancer le traitement des données. Pour nous aider dans cette tâche, il existe dans une majorité des langages des connecteurs permettant d'interagir par exemple avec des bases de données. Toutefois, il est important de respecter certains critères avant de se lancer dans le développement d'un programme maison. Comme on l'a vu tout au long de notre recherche, l'un des points clés du Big Data est sa capacité de mise à l'échelle. Il faut donc choisir le langage ou un framework pouvant lui aussi être mis à l'échelle facilement, c'est-à-dire qu'il doit adopter une architecture réactive ({\ref{a:architecture-reactive}}). Deux frameworks très connus utilisant cette architecture sont Akka et Vert.x. Akka utilise le principe de concurrence d'Acteur tandis que Vert.x utilise le principe d'évènements. Akka supporte officiellement Java et Scala et l’on peut facilement l'utiliser avec d'autres langages de la JVM\footnote{Machine virtuelle java}. De son côté, Vert.x supporte de manière officielle Java, Scala, Kotlin, JavaScript, Ruby et Ceylon. Il existe des modules pour Vert.x permettant de supporter d'autres langages comme le python par exemple, mais ils ne sont pas maintenu par Vert.x.
+Il est aussi tout à fait possible d'envisager d'écrire un programme simple permettant d'extraire des données depuis une source pour ensuite les injecter dans une base et lancer le traitement des données. Pour nous aider dans cette tâche, il existe dans une majorité des langages des connecteurs permettant d'interagir par exemple avec des bases de données. Toutefois, il est important de respecter certains critères avant de se lancer dans le développement d'un programme maison. Comme on l'a vu tout au long de notre recherche, l'un des points clés du Big Data est sa capacité de mise à l'échelle. Il faut donc choisir le langage ou un framework pouvant lui aussi être mis à l'échelle facilement, c'est-à-dire qu'il doit adopter une architecture réactive ({\ref{a:architecture-reactive}}). Deux frameworks très connus utilisant cette architecture sont Akka et Vert.x. Akka utilise le principe de concurrence d'Acteur tandis que Vert.x utilise le principe d'évènements. Akka supporte officiellement Java et Scala et l’on peut facilement l'utiliser avec d'autres langages de la JVM\footnote{Machine virtuelle Java}. De son côté, Vert.x supporte de manière officielle Java, Scala, Kotlin, JavaScript, Ruby et Ceylon. Il existe des modules pour Vert.x permettant de supporter d'autres langages comme le python par exemple, mais ils ne sont pas maintenu par Vert.x.
 
 \subsection*{Conclusion}
 
@@ -93,11 +93,11 @@ Pour conclure sur cette partie, nous avons donc le choix d'utiliser des solution
 
 \section{Traitement des données}
 
-Après avoir récupéré des données, nous devons passer à l'étape du traitement de celles-ci. Celui-ci à plusieurs rôles, en effet il peut servir à formater les données, leurs apportés de la cohérence en les combinant à des données déjà présente. Et pour finir, les rediriger vers le stockage souhaité. Le traitement des données peut se faire de deux manières différentes. La première solution est le traitement par Batch, et la seconde est le traitement en temps réel~\cite{TYPE_TRAITEMENT_DONNEES}\cite{TYPE_TRAITEMENT_DONNEES2}. Chacune possède ses avantages et inconvénients, nous allons voir ça plus en détail.
+Après avoir récupéré des données, nous devons passer à l'étape du traitement de celles-ci. Celui-ci à plusieurs rôles, en effet il peut servir à formater les données, leurs apportés de la cohérence en les combinant à des données déjà présentes. Et pour finir, les rediriger vers le stockage souhaité. Le traitement des données peut se faire de deux manières différentes. La première solution est le traitement par Batch, et la seconde est le traitement en temps réel~\cite{TYPE_TRAITEMENT_DONNEES}\cite{TYPE_TRAITEMENT_DONNEES2}. Chacune possède ses avantages et inconvénients, nous allons voir ça plus en détail.
 
 \subsection{Batch}
 
-Le traitement par Batch (Traitement par lot), consiste à traiter un important volume de données à un instant T. Le traitement par batch est surtout utilisé dans les cas ou nous avons des données stockées de manière journalière, et que nous avons besoin de tout traiter en fin de journée. Il n'est pas rare de voir des tâches de traitements par Batch s'exécuter dans la nuit, étant donné que l'on traite une masse de données importante, on sollicite la machine pendant une longue période. Réaliser ce traitement durant des périodes creuses, permet de largement diminuer l'impact sur l'utilisation de la plateforme (\ref{traitement-batch}).
+Le traitement par Batch (Traitement par lot), consiste à traiter un important volume de données à un instant T. Le traitement par batch est surtout utilisé dans les cas où nous avons des données stockées de manière journalière, et que nous avons besoin de tout traiter en fin de journée. Il n'est pas rare de voir des tâches de traitements par Batch s'exécuter dans la nuit, étant donné que l'on traite une masse de données importante, on sollicite la machine pendant une longue période. Réaliser ce traitement durant des périodes creuses, permet de largement diminuer l'impact sur l'utilisation de la plateforme (\ref{traitement-batch}).
 
 \begin{figure}[!h]
 	\centering 
@@ -173,7 +173,7 @@ Malgré un mode de fonctionnement similaire, ces deux solutions peuvent se déma
 
 \section{Stockage des données}
 
-Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs formats. De plus, l'utilisation de plusieurs bases de données est très courante, généralement une base de données est utilisée pour le stockage des données brutes avant leurs traitements (appelé lac de données) puis une autre base de données correspondant au nouveau format des données est utilisée pour améliorer les performances. Le stockage des données dans le Big Data doit s'assurer de pouvoir stocker toutes les données reçues et avoir une très haute disponibilité. Pour cela de la réplication de données et une mise à l'échelle pour la lecture et l'écriture des données sont présentes. Cela implique de s'éloigner des bases de données relationnelles et de s'orienter vers des solutions NoSQL qui facilitent la mise en place de ces concepts. Nous n'allons pas voir en détail le fonctionnement des bases de données NoSQL, nous nous contenterons de voir si les bases de données intègrent bien ces concepts et si elles ont des particularités sur la manière de traiter les données. Si vous souhaitez voir plus en détail le fonctionnement des bases de données NoSQL, je vous conseille de lire l'article de Sonia Guehis et Marta Rukoz à ce sujet~\cite{}.
+Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs formats. De plus, l'utilisation de plusieurs bases de données est très courante, généralement une base de données est utilisée pour le stockage des données brutes avant leurs traitements (appelé lac de données) puis une autre base de données correspondant au nouveau format des données est utilisée pour améliorer les performances. Le stockage des données dans le Big Data doit s'assurer de pouvoir stocker toutes les données reçues et avoir une très haute disponibilité. Pour cela de la réplication de données et une mise à l'échelle pour la lecture et l'écriture des données sont présentes. Cela implique de s'éloigner des bases de données relationnelles et de s'orienter vers des solutions NoSQL qui facilitent la mise en place de ces concepts. Nous n'allons pas voir en détail le fonctionnement des bases de données NoSQL, nous nous contenterons de voir si les bases de données intègrent bien ces concepts et si elles ont des particularités sur la manière de traiter les données. Si vous souhaitez voir plus en détail le fonctionnement des bases de données NoSQL, je vous conseille de lire l'article de Sonia Guehis et Marta Rukoz à ce sujet~\cite{ANALYTIC}.
 
 \subsection{Base de données de séries temporelles}
 
@@ -191,7 +191,7 @@ OpenTSDB ne fournit pas d'outil de requêtage simplifié, il faut donc être fam
 
 \subsubsection{InfluxDB}
 
-InfluxDB est une solution Open Source développé par InfluxData sous la licence MIT et écrit en Go.
+InfluxDB est une solution Open Source développée par InfluxData sous la licence MIT et écrit en Go.
 
 Contrairement à OpenTSDB, InfluxDB n'utilise pas de solution externe pour le stockage des données. Il possède sa propre solution optimisée pour les données de série temporelle. Cela à un double avantage. Premièrement, pas besoin d'installer une autre base de données et d'avoir les connaissances nécessaires pour la configurer pour des données de série temporelles. Cela permet aussi d'avoir des performances accrues, l'architecture de stockage étant créé dans le seul but de stocker des données de série temporelle, il est normal que les performances soient meilleures que pour une solution qui peut gérer plusieurs formats de données.
 
@@ -244,9 +244,9 @@ Le langage de requêtage utilisé par JanusGraph est Gremlin, il est aussi facil
 g.V().has('name', 'hercules').out('father').out('father').values('name')
 \end{verbatim}
 
-Cette requête permet de récupérer le nom du grand père du nœud ayant comme nom Hercules.
+Cette requête permet de récupérer le nom du grand-père du nœud ayant comme nom Hercules.
 
-JanusGraph propose lui aussi une mise à l'échelle pour la lecture des données et avec des performances similaire par rapport à son concurrent. Mais il ne s'arrête pas là, grâce à son utilisation de brique extérieure (HBase ou Cassandra), il propose aussi une mise à l'échelle pour l'écriture des données. 
+JanusGraph propose lui aussi une mise à l'échelle pour la lecture des données et avec des performances similaires par rapport à son concurrent. Mais il ne s'arrête pas là, grâce à son utilisation de brique extérieure (HBase ou Cassandra), il propose aussi une mise à l'échelle pour l'écriture des données. 
 
 \subsubsection*{Conclusion}
 
@@ -281,11 +281,11 @@ Tandis que Redis est une solution accessible par différentes applications sur l
 
 \subsubsection*{Conclusion}
 
-Nous pouvons constater que ces deux solutions de stockage basé sur le modèle clé/valeur sont complètement opposées. Cela va nous permettre de facilement dégager des critères pour définir les situations correspondants le mieux à chacun de ces outils.
+Nous pouvons constater que ces deux solutions de stockage basé sur le modèle clé/valeur sont complètement opposées. Cela va nous permettre de facilement dégager des critères pour définir les situations correspondant le mieux à chacun de ces outils.
 
 \subsection{Moteur d'indexation}
 
-Les moteurs d'indexation sont une catégorie de bases de données qui en général ne servent pas de stockage permanent, mais d'outil intermédiaire pour la visualisation et l'analyse des données. Le principe de cette solution est d'indexer toutes les données afin de permettre des requêtes beaucoup plus rapides, spécialement pour des opérations de recherche. Il est en effet beaucoup plus rapide de rechercher une donnée avec un catalogue qu'en parcourant toutes les données stockées. Cela permet de faire des recherches plus avancées sur les données tout en pouvant facilement mettre à l'échelle l'exécution des recherches et le stockage des données. Afin de stocker des données dans ce genre de base de données, il suffit de créer un index pour un jeu de données en définissant le type de nos champs. Une fois cela fait, au moment d'injection des données dans la base de données, il suffit de spécifier l'index à utiliser. Ensuite, les données seront indexées en fonction des paramètres présents dans l'index, cette opération peut prendre un peu de temps, mais une fois effectué, les recherches seront très rapides.
+Les moteurs d'indexation sont une catégorie de bases de données qui en général ne servent pas de stockage permanent, mais d'outils intermédiaires pour la visualisation et l'analyse des données. Le principe de cette solution est d'indexer toutes les données afin de permettre des requêtes beaucoup plus rapides, spécialement pour des opérations de recherche. Il est en effet beaucoup plus rapide de rechercher une donnée avec un catalogue qu'en parcourant toutes les données stockées. Cela permet de faire des recherches plus avancées sur les données tout en pouvant facilement mettre à l'échelle l'exécution des recherches et le stockage des données. Afin de stocker des données dans ce genre de base de données, il suffit de créer un index pour un jeu de données en définissant le type de nos champs. Une fois cela fait, au moment d'injection des données dans la base de données, il suffit de spécifier l'index à utiliser. Ensuite, les données seront indexées en fonction des paramètres présents dans l'index, cette opération peut prendre un peu de temps, mais une fois effectué, les recherches seront très rapides.
 
 \subsubsection{Elasticsearch}
 \label{elasticsearch}
@@ -296,7 +296,7 @@ Le moteur de recherche utilisé par Elasticsearch est Apache Lucene.
 
 Elasticsearch est une solution native, c'est-à-dire qu'il ne nécessite aucune installation de dépendances et que tous ses composants ont été conçus dans le but de créer un moteur d'indexation. Elasticsearch possède un mécanisme de mise à l'échelle. Par son indexation "strict", Elasticsearch permet un traitement de données structuré en temps réel. Il propose aussi une intégration de module d'apprentissage automatique permettant la détection d'anomalies en temps réel.
 
-Elasticsearch fait parti de la suite elastic qui propose aussi un outil d'analyse et de visualisation des données nommées Kibana (voir partie {\ref{kibana}}). Kibana et Elasticsearch sont entièrement compatibles, plus précisément Kibana s'intègre uniquement avec Elasticsearch.
+Elasticsearch fait partie de la suite elastic qui propose aussi un outil d'analyse et de visualisation des données nommées Kibana (voir partie {\ref{kibana}}). Kibana et Elasticsearch sont entièrement compatibles, plus précisément Kibana s'intègre uniquement avec Elasticsearch.
 
 \subsubsection{Apache Solr}
 \label{solr}
@@ -326,9 +326,17 @@ Les bases de données orientées documents utilisent le format JSON ou XML pour 
 
 \subsubsection{CouchDB}
 
+CouchDB est une solution open source sous la licence Apache 2, développé en Erlang par la fondation Apache.
+
+
+
 \subsubsection{CouchBase}
 
+CouchBase est une solution open source sous la licence Apache 2, développé en C++, Erlang et Go par CouchBase.
+
 \subsubsection{MongoDB}
+
+MongoDB est une solution open source sous la licence OSI, développé en C++, Go, JavaScript et Python.
 
 \subsection{Base de données à grandes colonnes}
 
@@ -337,30 +345,40 @@ Une base de données à grandes colonnes permet de stocker des enregistrements a
 \subsubsection{HBase}
 \label{hbase}
 
-Disponibilité, need HDFS, meilleur lecture
+HBase est une solution open source sous la licence Apache 2, développée en Java par la fondation Apache.
 
-La figure {\ref{wide-column-hbase}} représente un exemple de la manière dont sont stocker les données dans HBase.
+La figure {\ref{wide-column-hbase}} représente un exemple de la manière dont sont stockées les données dans HBase.
 
 \begin{figure}[!h]
 	\centering 
 	\includegraphics[scale=0.45]{img/wide-column-hbase.png}
-	\captionsource{Schéma du principe de stockage de cassandra}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
+	\captionsource{Schéma du principe de stockage de HBase}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
 	\label{wide-column-hbase}
 \end{figure}
+
+HBase utilise HDFS (voir partie {\ref{hdfs}}) comme solution de stockage et Zookeeper afin de gérer la mise à l'échelle.
+
+HBase se focalise sur la haute disponibilité des données stockées, il propose donc des performances en lecture très élevée. Par contre, il ne propose pas de cohérence des données.
 
 \subsubsection{Cassandra}
 \label{cassandra}
 
-Consistent, meilleur en écriture, solution native
+Cassandra est une solution open source sous la licence Apache 2, développée en Java par la fondation Apache.
 
-La figure {\ref{wide-column-cassandra}} représente un exemple de la manière dont sont stocker les données dans Cassandra.
+Cassandra est une solution native, il n'a pas besoin de librairies externes. Contrairement à HBase qui se focalise sur la disponibilité des données, Cassandra lui se focalise sur la cohérence des données. Cela a pour impact de le rendre moins performant que son concurrent pour la lecture des données. En contrepartie, il permet de pouvoir répliqué son stockage sur différentes machines à tout moment.
+
+La figure {\ref{wide-column-cassandra}} représente un exemple de la manière dont sont stockées les données dans Cassandra.
 
 \begin{figure}[!h]
 	\centering 
 	\includegraphics[scale=0.45]{img/wide-column-cassandra.png}
-	\captionsource{Schéma du principe de stockage de cassandra}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
+	\captionsource{Schéma du principe de stockage de Cassandra}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
 	\label{wide-column-cassandra}
 \end{figure}
+
+\subsubsection*{Conclusion}
+
+HBase et Cassandra partagent la même base avec un format de stockage de données très similaires, mais leurs cas d'utilisation sont complètement opposés.
 
 \subsection{Système de fichiers}
 
@@ -378,43 +396,43 @@ HDFS se compose de deux processus : un namenode et de multiples datanodes. Les d
 
 \section{Requêtage des données}
 
-Afin de permettre l'analyse et la visualisation des données, il est nécessaire de requêter les données stockées dans des bases de données. Pour cela il y a deux possibilités. La première solution est d'utiliser les outils de requêtage fournit par les bases de données, et la seconde est d'utiliser des librairies externes permettant d'uniformiser le requêtage entre les différentes bases de données.
+Afin de permettre l'analyse et la visualisation des données, il est nécessaire de requêter les données stockées dans des bases de données. Pour cela, il y a deux possibilités. La première solution est d'utiliser les outils de requêtage fournit par les bases de données, et la seconde est d'utiliser des librairies externes permettant d'uniformiser le requêtage entre les différentes bases de données.
 
-Aujourd'hui, les solutions de stockage propose des solutions de requêtage qui essaient d'être le plus simple possible tout en conservant des performances suffisante. L'utilisation de librairie externe est surtout utile si vous ne souhaitez pas apprendre les requêtes pour chacune des bases de données que vous utilisez. Étant donnée que ces solutions de requêtage ne sont pas primordiale et que ce mémoire traite déjà de beaucoup de technologies, nous n'allons pas nous intéresser à ces solutions. je voulais juste préciser que de telles solutions existait, et je vous laisse vous renseigner si cela vous intéresse.
+Aujourd'hui, les solutions de stockage proposent des solutions de requêtage qui essaient d'être le plus simple possible tout en conservant des performances suffisantes. L'utilisation de librairie externe est surtout utile si vous ne souhaitez pas apprendre les requêtes pour chacune des bases de données que vous utilisez. Étant donné que ces solutions de requêtage ne sont pas primordiale et que ce mémoire traite déjà de beaucoup de technologies, nous n'allons pas nous intéresser à ces solutions. Je voulais juste préciser que de telles solutions existaient, et je vous laisse vous renseigner si cela vous intéresse.
 
 \section{Visualisation et Analyse des données}
 
 \subsection{Kibana}
 \label{kibana}
 
-Kibana est une solution open source sous la licence Apache 2 écrit en JavaScript et développé par Elastic.
+Kibana est une solution open source sous la licence Apache 2 écrite en JavaScript et développée par Elastic.
 
-Kibana fait partie de la suite Elastic, il est conçu spécialement pour permettre de faire la visualisation de de l'analyse des données stockées sur Elasticsearch.
+Kibana fait partie de la suite Elastic, il est conçu spécialement pour permettre de faire la visualisation et de l'analyse des données stockées sur Elasticsearch.
 
-Elasticsearch propose la création de Dashboard qui sont constitués de visualisations. Kibana propose plusieurs types de visualisations, les classiques graphes linéaires, camembert etc. Il propose également des visualisations géographique, des interfaces de séries temporellee, un module d'étude de graph et pour finir de l'apprentissage automatique pour faire de la détection d'anomalies en temps réel.
+Elasticsearch propose la création de Dashboard qui est constitué de visualisations. Kibana propose plusieurs types de visualisations, les classiques graphes linéaires, camembert, etc. Il propose également des visualisations géographiques, des interfaces de séries temporelles, un module d'étude de graph et pour finir de l'apprentissage automatique pour faire de la détection d'anomalies en temps réel.
 
 \subsection{Banana}
 \label{banana}
 
-Banana est une solution open source sous la licence Apache 2 écrit JavaScript et développé par lucidworks.
+Banana est une solution open source sous la licence Apache 2 écrite JavaScript et développé par lucidworks.
 
-Banana est une solution d'analyse et de visualisation de données spécialement conçu pour fonctionner avec Apache Solr. Banana ressemble énormément à Kibana étant donné que c'est un fork de Kibana adapté pour fonctionner avec Apache Solr. Les seules différences avec Kibana sont dans la différence de direction évoqués lors de la présentation d'Apache Solr.
+Banana est une solution d'analyse et de visualisation de données spécialement conçue pour fonctionner avec Apache Solr. Banana ressemble énormément à Kibana, cela s'explique par le fait que c'est un fork de Kibana adapté pour fonctionner avec Apache Solr. Les seules différences avec Kibana sont dans la différence de direction évoquée lors de la présentation d'Apache Solr.
 
 \subsection{Grafana}
 
-Grafana est une solution de visualisation et d'analyse de données open source sous la licence Apache 2 écrit en Go et développé par Grafana Lab.
+Grafana est une solution open source sous la licence Apache 2 écrite en Go et développé par Grafana Lab.
 
 Grafana est spécialisé dans les données de séries temporelles afin de faire du monitoring. Il permet de récupérer de données depuis Elasticsearch et depuis les différentes bases de données de séries temporelles.
 
 \subsection{D3.js}
 
-D3.js est une solution de visualisation et d'analyse des données open source sous la licence BSD écrit en JavaScript et développé par Mike Bostock.
+D3.js est une solution de visualisation et d'analyse des données open source sous la licence BSD écrite en JavaScript et développée par Mike Bostock.
 
-D3.js est l'une des solutions d'analyse et de visualisation des données la plus complète à ce jour. Cet outil permet de faire pratiquement n'importe quel type de visualisation, sa seule limite est sa complexité. En effet, contrairement aux trois autres solutions, D3.js ne propose pas d'interface graphique pour la réalisation des visualisation, tout se fait en ligne de code JavaScript. Son avantage est qu'il peut récupérer des sources de données en json ou csv, donc si vous pouvez facilement récupérer vos données avec ce format vous pourrez utiliser D3.js pour faire vos visualisations.
+D3.js est l'une des solutions d'analyse et de visualisation des données la plus complète à ce jour. Cet outil permet de faire pratiquement n'importe quel type de visualisation, sa seule limite est sa complexité. En effet, contrairement aux trois autres solutions, D3.js ne propose pas d'interface graphique pour la réalisation des visualisations, tout se fait en ligne de code JavaScript. Son avantage est qu'il peut récupérer des sources de données en json ou csv, donc si vous pouvez facilement récupérer vos données avec ce format vous pourrez utiliser D3.js pour faire vos visualisations.
 
 \subsection*{Conclusion}
 
-Le domaine de la visualisation et analyse de données est très vaste, nous nous sommes intéressé qu'au solution les plus répandu, mais cela permet déjà de couvrir un maximum de cas d'utilisation.
+Le domaine de la visualisation et de l'analyse de données est très vaste, nous nous sommes intéressés qu'aux solutions les plus répandues, mais cela permet déjà de couvrir un maximum de cas d'utilisation.
 
 \section{Orchestration}
 
@@ -422,20 +440,16 @@ Les solutions Big Data ont besoin d'un moyen de programmer l'exécution de certa
 
 \subsection{Apache Oozie}
 
-Apache Oozie est une solution open source sous la licence Apache 2 écrit en Java et développé par Apache.
+Apache Oozie est une solution open source sous la licence Apache 2 écrite en Java et développée par Apache.
 
 Apache Oozie est conçu pour fonctionner avec les outils Hadoop (MapReduce et HDFS par exemple), mais il dispose aussi de fonctionnalités pour programmer l'exécution de script Shell ou Java.
 
 Oozie permet de définir une chaîne d'actions à effectuer à un moment précis, il permet aussi d'effectuer une autre action si jamais une des tâches de la chaîne échoue. Afin de paramétrer cette chaîne d'action, Oozie propose aux utilisateurs une interface graphique pour faciliter sa configuration.
 
-Permet de faire des chaînes d'actions.
-Interface graphique.
-
 \subsection{Cron}
 
-Une solution beaucoup plus basique et qui existe depuis longtemps, est l'utilisation de la cron tab sous Linux. Cette solution propose uniquement de lancer une tâche tout les x temps, mais avec l'utilisation des messages broker, il n'est pas forcément nécessaire de lancer une suite de tâche. En effet, si les messages brokers permettent de déclencher des évènements afin de récupérer les données, les envoyer au logiciel de traitement de données puis les stocker dans la base de données sélectionnée, la seule tâche restante est la génération d'un rapport. L'utilisation de la cron tab est suffisante pour ce genre de tâche et ne nécessite aucune installation, car elle est installée avec Linux.
+Une solution beaucoup plus basique et qui existe depuis longtemps, est l'utilisation de cron tab sous Linux. Cette solution propose uniquement de lancer une tâche tous les x temps, mais avec l'utilisation des messages broker, il n'est pas forcément nécessaire de lancer une suite de tâches. En effet, si les messages brokers permettent de déclencher des évènements afin de récupérer les données, les envoyer au logiciel de traitement de données puis les stocker dans la base de données sélectionnée, la seule tâche restante est la génération d'un rapport. L'utilisation de cron tab est suffisante pour ce genre de tâche et ne nécessite aucune installation, car elle est installée avec Linux.
 
 \subsubsection{Conclusion}
 
-Nous pouvons constater que la partie orchestration ne nécessite pas d'avoir une solution très avancée, même des solution basiques suffisent. Mais si l'on veut pouvoir facilement configurer l'exécution de nos tâches des solutions graphique sont tout de même à notre disposition.
-
+Nous pouvons constater que la partie orchestration ne nécessite pas d'avoir une solution très avancée, même des solutions basiques suffisent. Mais si l'on veut pouvoir facilement configurer l'exécution de nos tâches, des solutions graphiques sont tout de même à notre disposition.

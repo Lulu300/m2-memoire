@@ -2,27 +2,27 @@
 
 \chapter{Critères d'analyse}
 
-Maintenant que nous sommes familiers avec les architectures Big Data ainsi qu'avec les différentes solutions logicielles, nous allons pouvoir définir des critères afin de sélectionner l'architecture qui correspond à notre besoin. Certains critères ont déjà été dégagés au fil de ce mémoire. La première étape va être de définir des critères par rapport au choix de l'architecture et ensuite des critères pour choisir les solutions logicielles à utiliser au sein de cette architecture. En plus des différentes informations que nous avons exposées jusqu'ici, nous aurons besoin de prendre en compte le cas d'utilisation nécessitant le déploiement d'une architecture Big Data. Il est fortement possible que plusieurs critères correspondent au cas d'utilisation que vous souhaiter mettre en œuvre, et qu'ils sonnent des solutions différentes. Dans ce cas, ce sera à vous par rapport à vos ressources de définir lequel de ces critères est le plus important pour faire votre choix. Dans un premier temps, nous allons nous intéresser ce la manière dont les entreprises effectuent leurs choix d'architecture.
+Maintenant que nous sommes familiers avec les architectures, Big Data ainsi qu'avec les différentes solutions logicielles, nous allons pouvoir définir des critères afin de sélectionner l'architecture qui correspond à notre besoin. Certains critères ont déjà été dégagés au fil de ce mémoire. La première étape va être de définir des critères par rapport au choix de l'architecture et ensuite des critères pour choisir les solutions logicielles à utiliser au sein de cette architecture. En plus des différentes informations que nous avons exposées jusqu'ici, nous aurons besoin de prendre en compte le cas d'utilisation nécessitant le déploiement d'une architecture Big Data. Il est fortement possible que plusieurs critères correspondent au cas d'utilisation que vous souhaitez mettre en œuvre, et qu'ils sonnent des solutions différentes. Dans ce cas, ce sera à vous par rapport à vos ressources de définir lequel de ces critères est le plus important pour faire votre choix. Dans un premier temps, nous allons nous intéresser à la manière dont les entreprises effectuent leurs choix d'architecture.
 
 \section{Sélection d'architecture en entreprise}
 
-Cette partie sera entièrement basé sur mon expérience professionnel, je ne peux en aucun cas garantir que la sélection d'une architecture s'effectue de la même manière dans toutes les entreprises. 
+Cette partie sera entièrement basée sur mon expérience professionnelle, je ne peux en aucun cas garantir que la sélection d'une architecture s'effectue de la même manière dans toutes les entreprises. 
 
-De ce que j'ai pu voir jusqu'à aujourd'hui, les entreprise ne s'intéressent pas aux architectures existantes pour le choix de leur architecture. En effet, elle ne vont pas regarder quelles sont les différences entre l'architecture Kappa et l'architecture Lambda afin de savoir vers laquelle ils vont s'orienter. Les entreprises vont s'intéresser directement aux solutions logicielles, et vont de ce fait concevoir eux même leur propre architecture. Bien évidemment, l'architecture qui sera issue des choix de l'entreprise ressemblera énormément à l'architecture Kappa ou Lambda étant donné que ces deux architectures représente les deux moyens existant actuellement pour répondre aux besoins du Big Data. 
+De ce que j'ai pu voir jusqu'à aujourd'hui, les entreprises ne s'intéressent pas aux architectures existantes pour le choix de leur architecture. En effet, elles ne vont pas regarder quelles sont les différences entre l'architecture Kappa et l'architecture Lambda afin de savoir vers laquelle ils vont s'orienter. Les entreprises vont s'intéresser directement aux solutions logicielles, et vont de ce fait concevoir eux-mêmes leur propre architecture. Bien évidemment, l'architecture qui sera issue des choix de l'entreprise ressemblera énormément à l'architecture Kappa ou Lambda étant donné que ces deux architectures représentent les deux moyens existant actuellement pour répondre aux besoins du Big Data. 
 
-Afin de choisir leurs solutions logicielles, les entreprises vont définir leur cas d'utilisation, c'est à dire ce pourquoi ils veulent constituer une architecture Big Data. La définition du cas d'utilisation de l'entreprise passe des sources de données qu'elles vont exploiter jusqu'au visualisation et analyse qu'elles souhaitent réaliser. Les entreprises vont ensuite représenter sous forme de schéma le flux que les données vont parcourir avant d'être stockées pour l'analyse, et définir les types de traitements qu'elle devront subir. Cela permettra de sélectionner les outils de traitements et de stockage adaptés. Une fois leur cas d'utilisation et la définition de leur flux de données bien défini, ils vont pouvoir passer à la sélection des solutions logicielles. J'ai pu constater trois manières différentes que les entreprises utilisent pour effectuer leur choix.
+Afin de choisir leurs solutions logicielles, les entreprises vont définir leur cas d'utilisation, c'est-à-dire pourquoi ils veulent constituer une architecture Big Data. La définition du cas d'utilisation de l'entreprise passe des sources de données qu'elles vont exploiter jusqu'aux visualisations et analyses qu'elles souhaitent réaliser. Les entreprises vont ensuite représenter sous forme de schéma le flux que les données vont parcourir avant d'être stockées pour l'analyse, et définir les types de traitements qu'elles devront subir. Cela permettra de sélectionner les outils de traitements et de stockage adaptés. Une fois leur cas d'utilisation et la définition de leur flux de données bien défini, ils vont pouvoir passer à la sélection des solutions logicielles. J'ai pu constater trois manières différentes que les entreprises utilisent pour effectuer leur choix.
 
-La solution la plus simple pour une entreprise, est de fournir les informations de son cas d'utilisation ainsi que son flux de données à une autre entreprise spécialisé qui propose des architectures complètes. Une entreprise très connue dans ce domaine est HortonWorks. Ces entreprises se spécialise dans certains cas d'utilisation et vont sélectionner les solutions logicielles adaptées à ces cas d'utilisation. Faire appel à des entreprises spécialisées est la solution la plus simple, surtout lorsque l'entreprise faisant appel à ce service ne possède pas les connaissance en interne pour le choix et l'installation d'une architecture Big Data. Par contre ce genre de solution peut être très couteuse, spécialement si c'est l'entreprise externe qui réalise l'installation et la maintenance de l'architecture.
+La solution la plus simple pour une entreprise est de fournir les informations de son cas d'utilisation ainsi que son flux de données à une autre entreprise spécialisée qui propose des architectures complètes. Une entreprise très connue dans ce domaine est HortonWorks. Ces entreprises se spécialisent dans certains cas d'utilisation et vont sélectionner les solutions logicielles adaptées à ces cas d'utilisation. Faire appel à des entreprises spécialisées est la solution la plus simple, surtout lorsque l'entreprise faisant appel à ce service ne possède pas les connaissances en interne pour le choix et l'installation d'une architecture Big Data. Par contre, ce genre de solution peut être très couteuse, spécialement si c'est l'entreprise externe qui réalise l'installation et la maintenance de l'architecture.
 
-La seconde solution utilisée par les entreprises quand elles ne souhaitent pas faire appel à une entreprise externe, est de choisir leurs solutions logicielles en installant celles utilisé par les entreprises externes. Par exemple imaginons que les entreprises spécialisées dans les architectures Big Data utilisent souvent HBase pour le stockage des données, alors l'entreprise va elle aussi utilisé HBase pour le stockage des données. Cette solution peut s'avérer payante dans certains cas, si le cas d'utilisation de l'entreprise correspond à l'utilisation de cette technologie. Par contre si ce n'est pas le cas, toute l'architecture constitué par l'entreprise ne sera pas optimale et parfois même pas du tout adaptée.
+La seconde solution utilisée par les entreprises quand elles ne souhaitent pas faire appel à une entreprise externe est de choisir leurs solutions logicielles en installant celles utilisées par les entreprises externes. Par exemple, imaginons que les entreprises spécialisées dans les architectures Big Data utilisent souvent HBase pour le stockage des données, alors l'entreprise va elle aussi utiliser HBase pour le stockage des données. Cette solution peut s'avérer payante dans certains cas, si le cas d'utilisation de l'entreprise correspond à l'utilisation de cette technologie. Par contre si ce n'est pas le cas, toute l'architecture constituée par l'entreprise ne sera pas optimale et parfois même pas du tout adaptée.
 
-La dernière solution, est celle que j'ai effectué tout au long de ce mémoire, c'est à dire se renseigner sur chaque solutions logicielles pouvant répondre à leurs besoins, regarder leurs fonctionnement afin de sélectionner les solutions les plus pertinentes par rapport à leur cas d'utilisation. Une fois avoir réduit le nombre de solution à leur disposition, généralement les entreprises vont essayer de mettre en place les solutions logicielles qu'elles ont sélectionnées afin de faire des benchmarks pour leur permettre de faire le choix finale.
+La dernière solution, est celle que j'ai effectuée tout au long de ce mémoire, c'est à dire se renseigner sur chaque solution logicielle pouvant répondre à leurs besoins, regarder leurs fonctionnements afin de sélectionner les solutions les plus pertinentes par rapport à leur cas d'utilisation. Après avoir réduit le nombre de solutions à leur disposition, généralement les entreprises vont essayer de mettre en place les solutions logicielles qu'elles ont sélectionnées afin de faire des benchmarks pour leur permettre de faire le choix final.
 
 \section{Critères pour le choix de l'architecture}
 
-Avant de voir les différent critères par rapport au choix de l'architecture, je tiens à rappeler ce qui a été expliquer lors de l'introduction de ce mémoire, c'est qu'avant de passer sur une architecture Big Data il faut s'assurer d'en avoir l'utilité.
+Avant de voir les différents critères par rapport au choix de l'architecture, je tiens à rappeler ce qui a été expliqué lors de l'introduction de ce mémoire, c'est qu'avant de passer sur une architecture Big Data il faut s'assurer d'en avoir l'utilité.
 
-Nous allons exposer les critères ainsi que leur solution adapté sous la forme d'un tableau afin de permettre une visualisation simple pour effectuer notre choix.
+Nous allons exposer les critères ainsi que leur solution adaptée sous la forme d'un tableau afin de permettre une visualisation simple pour effectuer notre choix.
 \begin{table}[h!]
     \centering
 	\begin{tabular}{|p{10cm}|p{3cm}|} 
@@ -46,11 +46,11 @@ Nous allons exposer les critères ainsi que leur solution adapté sous la forme 
     \label{tab:critere-arch}
 \end{table}
 
-Pour le dernier critère, à savoir le stockage permanent des données batch avant leur traitement, si l'on suit scrupuleusement les architectures Lambda et Kappa, la solution choisie devrait être Lambda. Mais si notre cas d'utilisation correspond en tout point à une architecture Kappa et que l'on souhaite juste avoir une partir de stockage des données brutes, il est plus intéressant de conserver l'architecture Kappa qui est moins complexes et juste rajouter une base de données capable de stocker ces valeurs.
+Pour le dernier critère, à savoir le stockage permanent des données batch avant leur traitement, si l'on suit scrupuleusement les architectures Lambda et Kappa, la solution choisie devrait être Lambda. Mais si notre cas d'utilisation correspond en tout point à une architecture Kappa et que l'on souhaite juste avoir une partie de stockage des données brutes, il est plus intéressant de conserver l'architecture Kappa qui est moins complexe et juste rajouter une base de données capable de stocker ces valeurs.
 
 \section{Critères pour le choix des solutions logicielles}
 
-Nous allons maintenant nous attaquer aux critères permettant de départager les solutions logicielles que nous avons parcouru au long de ce mémoire. Pour cela nous allons proceder comme pour la partie précédente, c'est à dire définir des critère pour chaque catégorie de l'architecture. Bien évidemment, il sera préciser pour les parties non communes aux architectures Lambda et Kappa si cette catégorie ou tel outil est fait pour l'architecture Lambda ou Kappa pour que les choix restent cohérents.
+Nous allons maintenant nous attaquer aux critères permettant de départager les solutions logicielles que nous avons parcourues au long de ce mémoire. Pour cela nous allons procéder comme pour la partie précédente, c'est-à-dire définir des critères pour chaque catégorie de l'architecture. Bien évidemment, il sera précisé pour les parties non communes aux architectures Lambda et Kappa si cette catégorie ou tel outil est fait pour l'architecture Lambda ou Kappa pour que les choix restent cohérents.
 
 \subsection{Ingestion des données}
 
@@ -68,14 +68,14 @@ Pour la partie s'occupant de l'ingestion des données, nous avons pu constater q
   	\hline
   	Peu de sources de données & Programme personnalisé\\
   	\hline
-  	Nécessite d'avoir des performances élevés & Programme personnalisé\\
+  	Nécessité d'avoir des performances élevées & Programme personnalisé\\
   	\hline
 	\end{tabular}
-    \caption{Table des critères pour le choix entre une solution complète ou d'un programme personnalisé pour l'ingestion des données.}
+    \caption{Table des critères pour le choix d'une solution complète ou d'un programme personnalisé pour l'ingestion des données.}
     \label{tab:critere-etl-programme}
 \end{table}
 
-Comme on peut le constater, les critères de choix entre l'utilisation d'une solution complète et d'un programme personnalisé sont surtout par rapport à un problème de connaissance et de complexité de maintenance. En effet, si vous devez gérer l'extraction d'un grand nombre de sources de données, il sera plus facile de les gérer via un ETL/ELT qui mets à votre disposition une interface graphique. Interface graphique qui permet même à des personnes n'ayant pas de connaissances avancés dans la programmation de pouvoir mettre en place l'extraction des données. Tandis que le développement d'un programme personnalisé, est intéressant dans le cas ou vous avez les connaissances necessaire pour le mettre en place et que vous avez besoin de performances élevés ainsi qu'une consommation de ressources moins élevé qu'un ETL/ELT. Cela permet d'avoir d'avoir un plus petit nombre de machine et/ou moins de machine ce qui engendre un coût en matériel amoindri.
+Comme nous pouvons le constater, les critères de choix entre l'utilisation d'une solution complète et d'un programme personnalisé sont surtout par rapport à un problème de connaissance et de complexité de maintenance. En effet, si vous devez gérer l'extraction d'un grand nombre de sources de données, il sera plus facile de les gérer via un ETL/ELT qui met à votre disposition une interface graphique. Interface graphique qui permet même à des personnes n'ayant pas de connaissances avancées dans la programmation de mettre en place l'extraction des données. Tandis que le développement d'un programme personnalisé est intéressant dans le cas où vous avez les connaissances nécessaires pour le mettre en place et que vous avez besoin de performances élevées ainsi qu'une consommation de ressources moins élevée qu'un ETL/ELT. Cela permet d'avoir un plus petit nombre de machines et/ou moins de machines ce qui engendre un coût en matériel amoindri.
 
 \subsection{Message Broker}
 
@@ -93,26 +93,26 @@ Nous avons vu trois solutions pouvant être utilisées comme agent de message, �
   	\hline
   	Ordre des messages primordial & Kafka\\
   	\hline
-  	Nécessité de conserver les message à plus au moins long terme & Kafka\\
+  	Nécessité de conserver les messages à plus au moins long terme & Kafka\\
   	\hline
   	Utilisation de protocoles spécifiques (MQTT, AMQP, ...) & RabbitMQ / ActiveMQ\\
   	\hline
   	Règles de routage des messages complexe & RabbitMQ / ActiveMQ\\
   	\hline
 	\end{tabular}
-    \caption{Table des critères pour le choix du logicielle d'agent de messages}
+    \caption{Table des critères pour le choix du logiciel d'agent de messages}
     \label{tab:critere-message-broker}
 \end{table}
 
-Comme on peut le constater, Kafka se démarque complètement de ses deux concurrents avec des cas d'utilisation bien précis. Par contre ActiveMQ et RabbitMQ ne se démarquent pas du tout entre eux. En effet à part leur méthode de communication, ils répondent aux même besoins. Afin de les départager la solution serai de réaliser un benchmarks par rapport à votre cas d'utilisation.
+Comme on peut le constater, Kafka se démarque complètement de ses deux concurrents avec des cas d'utilisation bien précis. Par contre ActiveMQ et RabbitMQ ne se démarquent pas du tout entre eux. En effet, à part leur méthode de communication, ils répondent aux mêmes besoins. Afin de les départager, la solution serait de réaliser un benchmark par rapport à votre cas d'utilisation.
 
 \subsection{Traitement des données}
 
-Comme on l'a vu précédemment, il existe deux types de traitement de données, le traitement par lots et le traitement en temps réel. Pour choisir lequel de ces deux traitements correspond à votre cas d'utilisation, il suffit de voir quel architecture correspondait à vos critères dans la partie précédente. Si c'était l'architecture Kappa, vous aurez uniquement besoin d'une solution de traitement en temps réel, dans le cas contraire vous aurez besoin d'intégrer les deux types de traitements de données.
+Comme on l'a vu précédemment, il existe deux types de traitement de données, le traitement par lots et le traitement en temps réel. Pour choisir lequel de ces deux traitements correspond à votre cas d'utilisation, il suffit de voir quelle architecture correspondait à vos critères dans la partie précédente. Si c'était l'architecture Kappa, vous avez uniquement besoin d'une solution de traitement en temps réel, dans le cas contraire vous avez besoin d'intégrer les deux types de traitements de données.
 
 \subsubsection{Traitement par lots}
 
-Regardons maintenant comment départager les deux solutions de traitement pas lots que nous avons étudié.
+Regardons maintenant comment départager les deux solutions de traitement pas lots que nous avons étudiés.
 
 \begin{table}[h!]
     \centering
@@ -120,7 +120,7 @@ Regardons maintenant comment départager les deux solutions de traitement pas lo
   	\hline
   	\textbf{Critère} & \textbf{Solution} \\
   	\hline
-  	Nécessité d'utiliser des librairies autres que le machine learning & Spark\\
+  	Nécessité d'utiliser des librairies autres que l'apprentissage automatique & Spark\\
   	\hline
   	Nécessité d'avoir des performances accrues & Spark\\
   	\hline
@@ -133,11 +133,11 @@ Regardons maintenant comment départager les deux solutions de traitement pas lo
     \label{tab:critere-batch}
 \end{table}
 
-Spark est une solution qui va convenir dans le cadre ou des performances maximales sont nécessaires. Si jamais vous utilisé une architecture Kappa, l'utilisation de Spark peut être intéressante sur vous utilisez son petit frère pour le traitement de données en temps réel, cela vous permettra de garder une base de code commune entre vos différents traitements. MapReduce lui est intéressant dans le cas ou vous n'avez pas spécialement besoin de performances accrues et que vous préférez une solution moins complexe à mettre en place.
+Spark est une solution qui va convenir dans le cadre ou des performances maximales sont nécessaires. Si jamais vous utilisez une architecture Kappa, l'utilisation de Spark peut être intéressante si vous utilisez son petit frère pour le traitement de données en temps réel, cela vous permettra de garder une base de code commune entre vos différents traitements. MapReduce lui est intéressant dans le cas ou vous n'avez pas spécialement besoin de performances accrues et que vous préférez une solution moins complexe à mettre en place.
 
 \subsubsection{Traitement en temps réel}
 
-Le tableau {\ref{tab:critere-real-time}} présente les critères permettant de départager les deux solutions de traitements en temps réel que nous avons étudié, c'est à dire Apache Spark Streaming et Apache Storm.
+Le tableau {\ref{tab:critere-real-time}} présente les critères permettant de départager les deux solutions de traitements en temps réel que nous avons étudié, c'est-à-dire Apache Spark Streaming et Apache Storm.
 
 \begin{table}[h!]
     \centering
@@ -150,15 +150,15 @@ Le tableau {\ref{tab:critere-real-time}} présente les critères permettant de d
   	Source de données en streaming & Apache Storm\\
   	\hline
 	\end{tabular}
-    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \caption{Table des critères pour le choix de la solution de traitement en temps réel.}
     \label{tab:critere-real-time}
 \end{table}
 
-Le choix entre ces deux solutions s'avère être assez évident. Néanmoins, si pour vous les langages mis à disposition par l'une des solutions ne vous convient pas, vous pouvez aisément vous tourner vers l'autre solution. Un autre critère à prendre en compte, que vous utilisiez une architecture Kappa ou Lambda, l'utilisation de Spark vous permettra d'avoir une base de code similaire entre vos traitements par lots et vos traitements en temps réel.
+Le choix entre ces deux solutions s'avère être assez évident. Néanmoins, si pour vous les langages mis à disposition par l'une des solutions ne vous conviennent pas, vous pouvez aisément vous tourner vers l'autre solution. Un autre critère à prendre en compte, que vous utilisiez une architecture Kappa ou Lambda, l'utilisation de Spark vous permettra d'avoir une base de code similaire entre vos traitements par lots et vos traitements en temps réel.
 
 \subsection{Stockage des données}
 
-Comme nous avons pu le constater, il existe de nombreuses base données dans le domaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker et/ou l'utilisation que l'on souhaite faire de ces données. Le tableau {\ref{tab:critere-storage-type}} détails les différents critères permettant de choisir le type de base de données à utiliser.
+Comme nous avons pu le constater, il existe de nombreuses bases données dans le domaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker et/ou l'utilisation que l'on souhaite faire de ces données. Le tableau {\ref{tab:critere-storage-type}} détaille les différents critères permettant de choisir le type de base de données à utiliser.
 
 \begin{table}[h!]
     \centering
@@ -166,18 +166,74 @@ Comme nous avons pu le constater, il existe de nombreuses base données dans le 
   	\hline
   	\textbf{Critère} & \textbf{Solution} \\
   	\hline
-  	 & Spark Streaming\\
-  	\hline
-  	Source de données en streaming & Apache Storm\\
-  	\hline
 	\end{tabular}
-    \caption{Table des critères pour le choix de la solution de traitement par lots.}
+    \caption{Table des critères pour le choix du type de stockage.}
     \label{tab:critere-storage-type}
 \end{table}
 
+\subsubsection{Base de données à grandes colonnes}
+
+Le tableau {\ref{tab:critere-gc}} représente les critères permettant de départager les solutions de base de données à grandes colonnes, Cassandra et HBase.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'avoir une haute disponibilité des données & HBase\\
+  	\hline
+  	Nécessité d'avoir une cohérence des données & Cassandra\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de stockage à grandes colonnes.}
+    \label{tab:critere-gc}
+\end{table}
+
+HBase et Cassandra sont tout les deux de très bon choix, mais chacun s'oriente vers une direction différente. Cassandra permet la réplication des données sur plusieurs machines, on peut imaginer répliquer les données les plus sensibles d'un Data Center par exemple. Tandis que HBase s'oriente sur la très haute disponibilité des données.
+
 \subsubsection{Base de données de séries temporelles}
 
+InfluxDB et OpenTSDB sont les deux solutions pour le stockage se séries temporelles, le tableau {\ref{tab:critere-ts}} présente les critères de choix pour départager ces deux solutions.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Utilisation de HBase dans votre architecture et performance optimale non nécessaire & OpenTSDB\\
+  	\hline
+  	Nécessité de performance élevée en lecture et en écriture & InfluxDB\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de stockage de séries temporelles.}
+    \label{tab:critere-ts}
+\end{table}
+
+Dans cette catégorie, InfluxDB domine clairement, le seul intérêt de choisir son concurrent est dans le cas ou vous utilisez déjà HBase et que vous n'avez pas besoin de performance poussée.
+
+
 \subsubsection{Base de données orientée graphe}
+
+Dans le cadre des bases de données orientées graphe, les deux solutions étudiées étaient, Neo4J et JanusGraph, le tableau {\ref{tab:critere-graph}} illustre les critères permettant de les départager.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'une solution avec les plus hautes performances & JanusGraph\\
+  	\hline
+  	Simplicité d'utilisation & Neo4J\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de stockage orientée graphe.}
+    \label{tab:critere-graph}
+\end{table}
+
+Ces deux solutions sont de très bon choix, mais Neo4J se démarque sur sa simplicité tandis que JanusGraph brille par ses performances.
 
 \subsubsection{Base de données clés/valeurs}
 
@@ -185,16 +241,36 @@ Comme nous avons pu le constater, il existe de nombreuses base données dans le 
 
 \subsubsection{Base de données documents}
 
-\subsubsection{Base de données à grande colonne}
-
 \subsection{Orchestration}
+
+Passons maintenant à la définition des critères pour le choix de la solution d'orchestration.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'effectuer une action spécifique en cas d'erreur & Apache Oozie\\
+  	\hline
+  	Nécessité de lancer une succession de tâche & Apache Oozie\\
+  	\hline
+  	Exécution de tâche simple & Cron\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la d'orchestration.}
+    \label{tab:critere-orchestration}
+\end{table}
+
+Pour l'orchestration des tâches à effectuer, nous pouvons constater que Cron est la solution parfaite si vous souhaitez uniquement programmer des tâches basiques. Par contre, si vous souhaitez bénéficier d'une gestion des erreurs et la possibilité d'effectuer plusieurs tâches successives, Apache Oozie sera le meilleur choix.
 
 \subsection{Visualisation et Analyse des données}
 
 \section{Pour aller plus loin}
 
-Dans ce mémoire nous nous sommes intéresser à une très grande partie du Big Data, nous n'avons donc pas pu étudier de manière approfondit chacune des parties constituant une architecture Big Data. De ce fait, il y a moyen d'aller plus loin dans l'étude des solutions à notre disposition.
+Dans ce mémoire nous nous sommes intéressés à une très grande partie du Big Data, nous n'avons donc pas pu étudier de manière approfondit chacune des parties constituant une architecture Big Data. De ce fait, il y a moyen d'aller plus loin dans l'étude des solutions à notre disposition.
 
-La première manière de permettre un choix plus précis de solution, serait de prendre en compte plus de solution logicielles pour chaque catégorie de l'architecture. En effet, tout au long de ce mémoire, pour chaque catégorie je n'ai traiter que deux à trois solutions, en essayant de sélectionner celles qui étaient les plus matures et les plus intéressante. Mais en prenant en compte plus de solutions logicielles, il serait possible de rencontrer des solution logicielles vraiment différentes et couvrant de manière native encore plus de cas d'utilisation. Malheureusement, ce mémoire n'étant pas centrer sur une une seule partie du Big Data, il n'était pas possible de traiter autant de possibilités.
+La première manière de permettre un choix plus précis de solution serait de prendre en compte plus de solutions logicielles pour chaque catégorie de l'architecture. En effet, tout au long de ce mémoire, pour chaque catégorie nous avons traité que deux à trois solutions, en essayant de sélectionner celles qui étaient les plus matures et les plus intéressantes. Mais en prenant en compte plus de solutions logicielles, il serait possible de rencontrer des solutions logicielles vraiment différentes et couvrant de manière native encore plus de cas d'utilisation. Malheureusement, ce mémoire n'étant pas centré sur une seule partie du Big Data, il n'était pas possible de traiter autant de possibilités.
 
-La deuxième manière d'aller plus loin dans cet objectif de choisir l'architecture Big Data, serait de réaliser des benchmarks pour chaque solution logicielle présenté. Le fait de s'intéresser au fonctionnement de chacune des solutions étudiés n'est pas forcément suffisant pour garantir que c'est le meilleur choix par rapport à un cas d'utilisation. Afin d'avoir des tests complets, il faudrait utiliser plusieurs sources de données différentes pour les benchmarks, cela permettrait de se rendre compte facilement des différences de performances des outils en fonction des types des sources de données. Plus spécifiquement pour la partie traitement des données, il aura fallut faire des benchmarks pour plusieurs types de traitements de données afin de couvrir encore plus de cas d'utilisation et d'assurer la solution la plus optimale possible.
+La deuxième manière d'aller plus loin dans cet objectif de choisir l'architecture Big Data, serait de réaliser des benchmarks pour chaque solution logicielle présentée. Le fait de s'intéresser au fonctionnement de chacune des solutions étudiées n'est pas forcément suffisant pour garantir que c'est le meilleur choix par rapport à un cas d'utilisation. Afin d'avoir des tests complets, il faudrait utiliser plusieurs sources de données différentes pour les benchmarks, cela permettrait de se rendre compte facilement des différences de performances des outils en fonction des types des sources de données. Plus spécifiquement pour la partie traitement des données, il aurait fallu faire des benchmarks pour plusieurs types de traitements de données afin de couvrir encore plus de cas d'utilisation et d'assurer la solution la plus optimale possible.
+
