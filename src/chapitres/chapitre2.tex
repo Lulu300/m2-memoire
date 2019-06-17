@@ -328,15 +328,13 @@ Les bases de données orientées documents utilisent le format JSON ou XML pour 
 
 CouchDB est une solution open source sous la licence Apache 2, développé en Erlang par la fondation Apache.
 
-
-
-\subsubsection{CouchBase}
-
-CouchBase est une solution open source sous la licence Apache 2, développé en C++, Erlang et Go par CouchBase.
+CouchDB propose une solution de réplication des données très avancée. Cela permet de mettre en place la réplication très rapidement. CouchDB s'oriente vers la mise en place de données cohérente. Cela a pour impact de réduire les performances en lecture et en écriture.
 
 \subsubsection{MongoDB}
 
 MongoDB est une solution open source sous la licence OSI, développé en C++, Go, JavaScript et Python.
+
+MongoDB contrairement à son concurrent, s'oriente vers un mode de haute disponibilité afin de garantir des performances maximales. Cela l'empêche donc d'assurer correctement la réplication des données.
 
 \subsection{Base de données à grandes colonnes}
 
@@ -358,14 +356,14 @@ La figure {\ref{wide-column-hbase}} représente un exemple de la manière dont s
 
 HBase utilise HDFS (voir partie {\ref{hdfs}}) comme solution de stockage et Zookeeper afin de gérer la mise à l'échelle.
 
-HBase se focalise sur la haute disponibilité des données stockées, il propose donc des performances en lecture très élevée. Par contre, il ne propose pas de cohérence des données.
+HBase se focalise sur la cohérence des données stockées, mais peine un peu plus au niveau des écritures par rapport à ces concurrents.
 
 \subsubsection{Cassandra}
 \label{cassandra}
 
 Cassandra est une solution open source sous la licence Apache 2, développée en Java par la fondation Apache.
 
-Cassandra est une solution native, il n'a pas besoin de librairies externes. Contrairement à HBase qui se focalise sur la disponibilité des données, Cassandra lui se focalise sur la cohérence des données. Cela a pour impact de le rendre moins performant que son concurrent pour la lecture des données. En contrepartie, il permet de pouvoir répliqué son stockage sur différentes machines à tout moment.
+Cassandra est une solution native, il n'a pas besoin de librairies externes. Contrairement à HBase qui se focalise sur la cohérence des données, Cassandra lui se focalise sur la disponibilité des données. En contrepartie, il permet d'avoir des taux d'écriture supérieurs à HBase.
 
 La figure {\ref{wide-column-cassandra}} représente un exemple de la manière dont sont stockées les données dans Cassandra.
 

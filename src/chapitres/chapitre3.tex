@@ -158,18 +158,9 @@ Le choix entre ces deux solutions s'avère être assez évident. Néanmoins, si 
 
 \subsection{Stockage des données}
 
-Comme nous avons pu le constater, il existe de nombreuses bases données dans le domaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker et/ou l'utilisation que l'on souhaite faire de ces données. Le tableau {\ref{tab:critere-storage-type}} détaille les différents critères permettant de choisir le type de base de données à utiliser.
+Comme nous avons pu le constater, il existe de nombreuses bases données dans le domaine du Big Data, chacune ayant une manière différente de stocker les données. Le choix du type de base de données à utiliser va se faire par rapport aux formats des données qu'on l'on souhaite stocker ou l'utilisation que l'on souhaite faire de ces données.
 
-\begin{table}[h!]
-    \centering
-	\begin{tabular}{|p{10cm}|p{3cm}|} 
-  	\hline
-  	\textbf{Critère} & \textbf{Solution} \\
-  	\hline
-	\end{tabular}
-    \caption{Table des critères pour le choix du type de stockage.}
-    \label{tab:critere-storage-type}
-\end{table}
+Pour faire simple, si vous avez besoin de faire un moteur de recherche, il faut s'orienter vers les solutions de moteurs d'indexation. Pour le stockage des données, il suffit de prendre la base de données correspondante au format de vos données (Série temporelle, graphe, etc.). Si jamais votre format de données ne correspond à aucun des modèles classiques, il faut s'orienter vers les bases de données clé/valeur et les bases de données à grandes colonnes. Le choix entre ces deux bases de données se fera par rapport à la dimension de vos données.
 
 \subsubsection{Base de données à grandes colonnes}
 
@@ -181,16 +172,16 @@ Le tableau {\ref{tab:critere-gc}} représente les critères permettant de dépar
   	\hline
   	\textbf{Critère} & \textbf{Solution} \\
   	\hline
-  	Nécessité d'avoir une haute disponibilité des données & HBase\\
+  	Nécessité d'avoir une haute disponibilité des données & Cassandra\\
   	\hline
-  	Nécessité d'avoir une cohérence des données & Cassandra\\
+  	Nécessité d'avoir une cohérence des données & HBase\\
   	\hline
 	\end{tabular}
     \caption{Table des critères pour le choix de la solution de stockage à grandes colonnes.}
     \label{tab:critere-gc}
 \end{table}
 
-HBase et Cassandra sont tout les deux de très bon choix, mais chacun s'oriente vers une direction différente. Cassandra permet la réplication des données sur plusieurs machines, on peut imaginer répliquer les données les plus sensibles d'un Data Center par exemple. Tandis que HBase s'oriente sur la très haute disponibilité des données.
+HBase et Cassandra sont tout les deux de très bon choix, mais chacun s'oriente vers une direction différente. HBase permet la réplication des données sur plusieurs machines, on peut imaginer répliquer les données les plus sensibles d'un Data Center par exemple. Tandis que Cassandra s'oriente sur la très haute disponibilité des données.
 
 \subsubsection{Base de données de séries temporelles}
 
@@ -237,9 +228,62 @@ Ces deux solutions sont de très bon choix, mais Neo4J se démarque sur sa simpl
 
 \subsubsection{Base de données clés/valeurs}
 
+Le tableau {\ref{tab:critere-kv}} représente les critères départageant RocksDB et Redis dans la catégorie de stockage clés/valeurs
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'intégrer une base de données dans une application (embarqué) & RocksDB\\
+  	\hline
+  	Nécessité d'une base de données partagée et mise à l'échelle & Redis\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de stockage clés/valeurs.}
+    \label{tab:critere-kv}
+\end{table}
+
+Nous pouvons constater que Redis permet de partager les informations entre différentes applications alors que son concurrent lui propose une solution embarquée.
+
 \subsubsection{Moteur d'indexation}
 
-\subsubsection{Base de données documents}
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité de stocker ces données sur HDFS & Apache Solr\\
+  	\hline
+  	Simplicité d'utilisation & Elasticsearch\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de moteur d'indexation.}
+    \label{tab:critere-se}
+\end{table}
+
+\subsubsection{Base de données orientée documents}
+
+Afin de départager nos deux solutions de base de données orientées documents, nous allons utiliser le tableau {\ref{tab:critere-doc}}.
+
+\begin{table}[h!]
+    \centering
+	\begin{tabular}{|p{10cm}|p{3cm}|} 
+  	\hline
+  	\textbf{Critère} & \textbf{Solution} \\
+  	\hline
+  	Nécessité d'avoir des performances élevées & MongoDB\\
+  	\hline
+  	Nécessité d'avoir une réplication complète des données & CouchDB\\
+  	\hline
+	\end{tabular}
+    \caption{Table des critères pour le choix de la solution de stockage orientée document.}
+    \label{tab:critere-doc}
+\end{table}
+
+Comme on a pu l'observer entre HBase et Cassandra, nous retrouvons là aussi une solution orientée vers la disponibilité des données tandis que l'autre s'oriente vers la réplication des données.
 
 \subsection{Orchestration}
 
@@ -265,6 +309,8 @@ Passons maintenant à la définition des critères pour le choix de la solution 
 Pour l'orchestration des tâches à effectuer, nous pouvons constater que Cron est la solution parfaite si vous souhaitez uniquement programmer des tâches basiques. Par contre, si vous souhaitez bénéficier d'une gestion des erreurs et la possibilité d'effectuer plusieurs tâches successives, Apache Oozie sera le meilleur choix.
 
 \subsection{Visualisation et Analyse des données}
+
+Pour la visualisation des données, le choix est assez simple. Si vous désirez faire du monitoring de donnée, la solution la plus adéquate est Grafana qui est spécialisé dans ce domaine. Si vous souhaitez faire des visualisations complexes, la meilleure solution est D3.js. Et si vous souhaitez une solution simple permettant de faire des visualisations rapides, il faut vous orienter vers Kibana et Solr selon votre moteur d'indexation.
 
 \section{Pour aller plus loin}
 
