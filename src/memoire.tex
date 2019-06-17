@@ -70,6 +70,13 @@
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    \textbf{Source:} #2%
+  }%
+}
 
 %----------------------------------------------------------------------------------------
 %	INFORMATIONS

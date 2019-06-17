@@ -1,9 +1,13 @@
 \documentclass[memoire.tex]{subfiles}
 
-\chapter{Implémentation : Exemple avec un processus métier}
+\chapter{Comment évaluer l'architecture résultant de l'application des critères}
 
-\section{Définition du processus métier}
+Maintenant que nous avons réussi à définir des critères de choix pour notre architecture Big Data, il reste encore une étape pour s'assurer que les critères que nous avons défini sont corrects. Pour cela il va falloir tester notre démarche en s'appuyant sur des cas d'utilisations réels.
 
-\section{Application des méthodes sur le processus métier}
+\section{Application des critères définis sur des cas d'utilisations réels}
 
-\section{Évaluation du résultat}
+Dans un premier temps, il faut appliquer notre démarche à des cas d'utilisations réels. Pour cela, nous allons détailler les types de sources de données qui correspondent au cas d'utilisation que nous avons choisis, le type de traitement nécessaire sur ces données ainsi que la valeur que l'on veut dégager à l'aide de nos analyses sur ces données. Une fois cela fait, nous allons nous appuyer sur les critères réaliser lors de la partie précédente et lister les solutions logicielles qui ont été retenu. Une fois cette étape terminée, nous allons traiter chaque cas d'utilisation un par un. Pour chacun de ces cas d'utilisation, nous allons mettre en place les solutions logicielles issues de nos critères, ce qui nous permettra de tester notre solution dans des conditions réelles.
+
+\section{Évaluation des résultats}
+
+Une fois la mise en place de notre solution, afin de pouvoir mesurer son efficacité, il faudra réaliser des benchmarks et laisser la solution en place pendant quelques heures. Pendant que les données arriveront dans notre architecture, nous pourrons nous concentrer sur la réalisation des visualisation et des analyses à effectuer sur les données afin de vérifier si la solution sélectionnée nous permet bien de réaliser sans encombre la mise en valeur que le cas d'utilisation nécessitait. En plus des résultats des benchmarks et de la réussite à faire les analyses nécessaire, il faudra aussi évaluer si tout le chemin de la donnée a bien été parcouru sans soucis. Par exemple est-ce qu'il n'a pas fallut faire du développement spécifique qui n'était pas prévu pour permettre la communication entre plusieurs briques, ou bien pour effectuer le traitement des données ou encore pour le stockage des données.

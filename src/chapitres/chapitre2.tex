@@ -46,7 +46,7 @@ Ce format n'a rien à voir avec les logs applicatifs, il s’agit d’un tableau
 
 Comme Kafka, ActiveMQ utilise le système de communication Publisher(Producer) / Subscriber. L'intérêt principal d'ActiveMQ est de connecter différentes application réaliser avec des langages différents avec l'aide des API fournit.
 
-De la même manière que Kafka, il permet de se mettre à l'échelle très facilement mais il n'utilise pas de brique intermédiaire afin de gérer les états des brokers (ZooKeeper). Les différentes instances d'ActiveMQ utilise en système de multicast afin de se découvrir.
+De la même manière que Kafka, il permet de se mettre à l'échelle très facilement mais il n'utilise pas de brique intermédiaire afin de gérer les états des brokers (ZooKeeper). Les différentes instances d'ActiveMQ utilisent un système de multicast afin de se découvrir.
 
 \subsection{RabbitMQ}
 
@@ -159,9 +159,9 @@ Malgré un mode de fonctionnement similaire, ces deux solutions peuvent se déma
 
 \section{Stockage des données}
 
-Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs format. De plus l'utilisation de plusieurs bases de données est très courante, généralement une base de données est utilisé pour le stockage des données brutes avant leur traitements puis une autre base de données correspondant au nouveau format des données est utilisé pour améliorer les performances.
+Une partie très importante du Big Data est le stockage des nombreuses données que l'ont reçoit. Il existe énormément de manières différentes de stocker des données selon la manière dont nous voulons les utiliser par la suite et surtout selon leurs format. De plus l'utilisation de plusieurs bases de données est très courante, généralement une base de données est utilisée pour le stockage des données brutes avant leur traitements (appelé lac de données) puis une autre base de données correspondant au nouveau format des données est utilisé pour améliorer les performances. Le stockage des données dans le Big Data doit s'assurer de pouvoir stocker toutes les données reçu et avoir une très haute disponibilité. Pour cela de la réplication de données et une mise à l'échelle pour la lecture et l'écriture des données. Cela implique de s'éloigner des bases de données relationnelle et de s'orienter vers des solutions NoSQL qui facilite la mise en place de ces concept. Nous n'allons pas voir en détail le fonctionnement des bases de données NoSQL, nous nous contenterons de voir si les bases de données intègrent bien ces concepts et si elles ont des particularités sur la manière de traiter les données. Si vous souhaitez voir plus en détail le fonctionnement des bases de données NoSQL je vous conseille de lire l'article de Sonia Guehis et Marta Rukoz à ce sujet~\cite{}.
 
-\subsection{Time Series}
+\subsection{Base de données de séries temporelles}
 
 La première catégorie de base de données que nous allons traiter, est la base de données de séries temporelles. Ce type de stockage est de plus en plus important avec l'explosion de l'IoT qui est un des domaine générant le plus de donnée de séries temporelles.
 
@@ -187,27 +187,128 @@ Par rapport à son concurrent, InfluxDB propose une solution de requetâge de do
 
 Nous pouvons constater que InfluxDB à l'air d'être la meilleure solution pour le stockage de série temporelle, mais le fait que OpenTSDB utilise HBase peut être un critère de choix pour certaines personnes pour le choix de leur architecture.
 
-\subsection{Graph}
+\subsection{Base de données orientée graphe}
 
+Les bases de données orientée graphe sont apparu afin de permettre de stocker facilement les relations présente entre plusieurs données. Une base de donnée de graph est basé sur les bases de données orienté objet mais avec l'utilisation de la théorie des graphes. Le stockage des données est constitué de nœuds qui représentent les données et d'arcs qui sont des pointeurs physique représentant les relations entre chaque nœuds. Ce type de bases de données s'avère très utile dans le cadre des études des relations entre de nombreuses de données, ce qui souvent le cas dans le domaine du Big Data. La figure {\ref{graph-exemple}} montre un exemple de graphe qui peut être stocké dans une base de données orientée graph.
 
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.35]{img/graph_exemple.jpg}
+	\captionsource{Exemple d'un graphe dans une base de données orientée graphe}{https://neo4j.com/developer/graph-database/}
+	\label{graph-exemple}
+\end{figure}
 
 \subsubsection{Neo4j}
 
+Neo4J est une base de données orientée graphe native écrite en Java et créer par l'entreprise portant le même nom. Il existe deux version de Neo4J, une version communautaire qui est open source sous la licence GPL3 et une version entreprise qui elle n'est pas open source. La solution communautaire manque de module de sécurité et ne propose de solution de mise à l'échelle.
+
+Neo4J propose une longue liste de langage compatible, .Net, Clojure, Elixir, Go, Groovy, Haskell, Java, JavaScript, Perl, PHP, Python, Ruby et Scala.
+
+Un atout de Neo4J est que c'est une solution native, cela permet une installation rapide et aucune dépendance nécessaire. Neo4J propose une interface web intégré pour la visualisation des graphes ainsi que pour l"écriture de requête avec leur propre langage nommé Cypher. Voici un exemple de requête utilisant le langage Cypher :
+
+\begin{verbatim}
+(p:Person {name: "Jennifer"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
+\end{verbatim}
+
+Cette requête permet de récupérer la relation qui représente le fait que Jennifer aime la technologie.
+
+Neo4J propose une mise à l'échelle pour la lecture ce qui la rend très rapide, malheureusement l'écriture n'est pas mise à l'échelle. Les performances en écriture restent très performantes mais l'insertion d'énormément de données sur une longue période de temps peut s'avérer assez lente.
+
 \subsubsection{JanusGraph}
 
-\subsection{Clés/Valeurs}
+JanusGraph est une solution open source sous la licence Apache 2 écrit en Java.
+
+Contrairement à Neo4J, la liste de langage supportés par Janusgraph est beaucoup moins importante. Il ne supporte que le Java, Python et Clojure.
+
+JanusGraph n'est pas une solution native, il s'appuie sur Hbase (voir partie {\ref{hbase}}) ou Cassandra (voir partie {\ref{cassandra}}) pour le stockage des données et pour l'indexation il est fortement recommandé d'utiliser ElasticSearch (voir partie {\ref{elasticsearch}}) ou Solr (voir partie {\ref{solr}}) qui sont des moteurs d'indexation. Cela implique donc qu'il est nécessaire d'avoir à disposition ces solutions et de les maitriser afin de permettre leurs communication.
+
+JanusGraph ne possède pas d'interface web, mais comme il s'appuie sur une solution de requêtage open source, cela lui permet de bénéficier d'interface web déjà développées. L'interface web la plus intéressante est Linkurious. 
+
+Le langage de requêtage utilisé par JanusGraph est Gremlin, il est aussi facile à utiliser que Cypher mais les requête ne sont pas formées de la même manière. Voici un exemple de requête avec le langage Gremlin : 
+
+\begin{verbatim}
+g.V().has('name', 'hercules').out('father').out('father').values('name')
+\end{verbatim}
+
+Cette requête permet de récupérer le nom du grand père du nœud ayant comme nom hercules.
+
+JanusGraph propose lui aussi une mise à l'échelle pour la lecture des données et avec des performances similaire à son concurrent. Mais il ne s'arrête pas là, grâce à son utilisation de brique extérieures (HBase ou Cassandra), il propose aussi une mise à l'échelle pour l'écriture des données. 
+
+\subsubsection*{Conclusion}
+
+Nous pouvons constater que sur les deux solutions que nous avons étudier, la différence majeure réside sur le fait que Neo4J est une solution native tandis que JanusGraph s'appuie sur des technologies déjà existante.
+
+\subsection{Base de données clés/valeurs}
+
+Les bases de données clés / valeurs se repose sur une structure très simple, qui est probablement la structure de données la plus simple. Le principe repose sur le fait qu'on ne peut y stocker uniquement des paires de clés et de valeurs. La récupération des valeurs s'effectue via une clé connue. Ce système de stockage ressemble au HashMap que l'on peut utiliser dans différents langages. Au delà de ce principe de paires, il n'y aucune structure des données, cela permet de pouvoir stocker n'importe quelle donnée sans avoir à définir un schéma à respecter et donc de réduire l'espace nécessaire.
+
+Ce système de stockage étant trop simple pour répondre aux besoins d'application complexes trouvent néanmoins son intérêt dans la cadre de système embarqués ou bien si il y a un besoin de traitement de données à très haute performance.
 
 \subsubsection{Redis}
 
+Redis est développé par Redis Lab et écrit en C, il est open source sous la licence BSD.
+
+Redis propose un support d'un très grand nombre de langage de programmation, il en propose plus de 20 dont par exemple Java, Python, C++ et Go.
+
+Redis opère principalement sur la mémoire RAM pour garantir la vitesse la plus élevée possible. Il propose tout de même une solution de "persistance" via des snapshots effectué régulièrement. Les snapshots sont des sauvegarde de ce qui est stocké sur la RAM à un instant T.
+
+Redis propose également un cluster, permettant de répartir la charge sur différents nœuds. ainsi qu'une réplication des données.
+
+
 \subsubsection{RocksDB}
+
+RocksDB est une solution open source sous les licences GPLv2 et Apache 2, il est écrit en C++ et développé par Facebook.
+
+Contrairement à Redis, RocksDB supporte beaucoup moins de langage, il ne propose le support que pour Java et C++.
+
+A l'opposé de Redis, RocksDB opère principalement sur disque, ce qui permet de rendre les données persistante à tout moment et de pouvoir interagir avec des données plus volumineuses. Afin de palier le manque de vitesse par rapport à son concurent qui utilise la RAM, RocksDB profite du stockage flash apporté par les nouveaux SSD proposant des débits de plus en plus rapide.
+
+Tandis que Redis est une solution accessible par différente applications sur le réseau, RocksDB lui est une solution embarqué sur un appareil, il est accessible uniquement sur la machine sur laquelle il est installé. Cela limite donc les possibilités de mise à l'échelle mais permet de réduire les interactions sur le stockage.
+
+\subsubsection*{Conclusion}
+
+Nous pouvons constater que ces deux solutions de stockage basé sur le modèle clé/valeur sont complètement opposé. Cela va nous permettre de facilement dégager des critères pour définir les situations correspondants le mieux à chacun de ces outils.
 
 \subsection{Moteur d'indexation}
 
-\subsubsection{ElasticSearch}
+les moteurs d'indexation sont une catégorie de bases de données qui en général ne servent de stockage permanent, mais d'outil intermédiaire pour la visualisation et l'analyse des données. Le principe de cet solution est d'indexer toutes les données afin de permettre des requêtes beaucoup plus rapide, spécialement pour des opérations de recherche. Il est en effet beaucoup plus rapide de rechercher une donnée par avec un catalogue qu'en parcourant toutes les données stockées. Cela permet de faire des recherches plus avancées sur les données tout en pouvant facilement mettre à l'échelle l'exécution des recherches et le stockage des données. Afin de stocker des données dans ce genre de base de données, il suffit de créer un index pour un jeu de données en définissant le type de nos champs. Une fois cela fait, au moment d'injection des données dans la base de données, il suffit de spécifier l'index à utiliser. Ensuite les données seront indexées en fonction des paramètres présent dans l'index, cette opération peut prendre un peu de temps, mais une fois effectué, les recherches seront très rapide.
 
-\subsubsection{Solr}
+\subsubsection{Elasticsearch}
+\label{elasticsearch}
 
-\subsection{Documents}
+Elasticsearch est une solution open source sous la licence Apache 2 écrit en Java par l'entreprise Elastic.
+
+Le moteur de recherche utilisé par Elasticsearch est Apache Lucene.
+
+Elasticsearch est une solution native, c'est à dire qu'il ne nécessite aucune installation de dépendances et que tous ses composants ont été conçus dans le but de créer un moteur d'indexation. Elasticsearch possède un mécanisme de mise à l'échelle. De par son indexation "strict", Elasticsearch permet un traitement de données structurés en temps réel. Il propose aussi une intégration de module d'apprentissage automatique permettant la détection d'anomalies en temps réel.
+
+Elasticsearch fait parti de la suite elastic qui propose aussi un outil d'analyse et de visualisation des données nommé Kibana (Voir partie {\ref{kibana}}). Kibana et Elasticsearch sont entièrement compatible, plus précisément Kibana s'intègre uniquement avec Elasticsearch.
+
+\subsubsection{Apache Solr}
+\label{solr}
+
+Apache Solr est une solution open source sous la licence Apache 2 écrit en Java par l'entreprise Apache.
+
+Solr est très similaire à Elasticsearch en terme de performances malgré une architecture vraiment différente. En effet, Solr s'appuie sur plusieurs dépendances afin de proposer une solution complète contrairement à Elasticsearch qui lui ne nécessite aucune brique extérieure. Le seul point commun avec Elasticsearch est que Solr aussi utilise Apache Lucene. Pour le stockage des données l'utilisation d'Hadoop HDFS (Voir partie {\ref{hdfs}}) est requise. Solr lui aussi dispose d'une solution de mise à l'échelle, mais cela nécessite d'installer Zookeeper. Solr fournit aussi un module d'apprentissage automatique, mais celui-ci est orienté pour la compréhension du langage naturel. Le mode de fonctionnement de l'indexation de Solr lui permet de traiter des données moins structuré qu'Elasticsearch, mais il supporte moins bien les traitements en temps réel.
+
+Apache Solr dispose lui aussi de son outil de visualisation et d'analyse de données dédié, il s'agit de Banana (Voir partie {\ref{banana}}).
+
+\subsubsection*{Conclusion}
+
+Malgré une base commune entre ces deux solutions, leurs utilisation diffèrent de par les différences dans leur architecture.
+
+
+\subsection{Base de données orientée documents}
+
+Les bases de données orientées documents sont une forme avancé du stockage clé/valeur. Ces bases de données ont la particularité d'avoir une organisation des données sans schéma. Cela implique que : 
+\begin{itemize}
+\item Les enregistrements peuvent avoir des colonnes différentes.
+\item Le type des valeurs associés a chaque colonne peut être différent.
+\item Les colonnes peuvent avoir plus d'une valeur (tableaux).
+\item Les enregistrements peuvent avoir une structure imbriquée.
+\end{itemize}
+ 
+Les bases de données orientée documents utilisent le format JSON ou XML pour le stockage des données. Le format JSON étant moins lourd est celui qui est de plus en plus privilégié pour ce genre de base de données.
 
 \subsubsection{CouchDB}
 
@@ -215,29 +316,88 @@ Nous pouvons constater que InfluxDB à l'air d'être la meilleure solution pour 
 
 \subsubsection{MongoDB}
 
-\subsection{Wide Column}
+\subsection{Base de données à grande colonne}
+
+Une base de données à grande colonne permet de stocker des enregistrements avec la capacité de contenir un très grand nombre de colonnes dynamiques. Les noms des colonnes ainsi que les clés des enregistrement n'étant pas fixés, un enregistrement peut contenir énormément de colonnes. De part ce mode de fonctionnement, les bases de données à grande colonne sont souvent considérées comme des bases de données clé/valeur bi dimensionnels.
 
 \subsubsection{HBase}
 \label{hbase}
 
+Disponibilité, need HDFS, meilleur lecture
+
+La figure {\ref{wide-column-hbase}} représente un exemple de la manière dont sont stocker les données dans HBase.
+
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.45]{img/wide-column-hbase.png}
+	\captionsource{Schéma du principe de stockage de cassandra}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
+	\label{wide-column-hbase}
+\end{figure}
+
 \subsubsection{Cassandra}
+\label{cassandra}
+
+Consistent, meilleur en écriture, solution native
+
+La figure {\ref{wide-column-cassandra}} représente un exemple de la manière dont sont stocker les données dans Cassandra.
+
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.45]{img/wide-column-cassandra.png}
+	\captionsource{Schéma du principe de stockage de cassandra}{http://www.alliedc.com/apache-cassandra-database-4-problems-that-cassandra-developers-administrators-face/}
+	\label{wide-column-cassandra}
+\end{figure}
 
 \subsection{Système de fichiers}
 
 \subsubsection{Hadoop HDFS}
+\label{hdfs}
 
-\section{Orchestration}
+\section{Requêtage des données}
 
-\section{Requetâge}
+Afin de permettre l'analyse et la visualisation des données, il est nécessaire de requêter les données stockées dans des bases de données. Pour cela il y a deux possibilités. La première solution est d'utiliser les outils de requêtage fournit par les bases de données, et la seconde est d'utiliser des librairies externes permettant d'uniformiser le requêtage entre les différentes bases de données.
+
+Aujourd'hui, les solutions de stockage propose des solutions de requêtage qui essaient d'être le plus simple possible tout en conservant des performances suffisante. L'utilisation de librairie externe est surtout utile si vous ne souhaitez pas apprendre les requêtes pour chacune des bases de données que vous utilisez. Étant donnée que ces solutions de requêtage ne sont pas primordiale et que ce mémoire traite déjà de beaucoup de technologies, nous n'allons pas nous intéresser à ces solutions. je voulais juste préciser que de telles solutions existait, et je vous laisse vous renseigner si cela vous intéresse.
 
 \section{Visualisation et Analyse des données}
 
 \subsection{Kibana}
+\label{kibana}
+
+Comme Banana mais pour ES.
 
 \subsection{Banana}
+\label{banana}
+
+Comme Kibana mais pour Solr
 
 \subsection{Grafana}
+
+Se plug partout. Spécialisé dans le monitoring.
 
 \subsection{Tableau}
 
 \subsection{Click}
+
+\section{Orchestration}
+
+Les solutions Big Data ont besoin d'un moyen de programmer l'exécution de certaines tâches, par exemple l'exécution de l'ingestion des données d'une source de données ou bien la création d'un rapport sur un outil d'analyse. C'est pour cela que l'on utilise un orchestrateur.
+
+\subsection{Apache Oozie}
+
+Apache Oozie est une solution open source sous la licence Apache 2 écrit en Java et développé par Apache.
+
+Apache Oozie est conçu pour fonctionner avec les outils Hadoop (MapReduce et HDFS par exemple), mais il dispose aussi de fonctionnalités pour programmer l'exécution de script Shell ou Java.
+
+Oozie permet de définir une chaîne d'actions à effectuer à un moment précis, il permet aussi d'effectuer une autre action si jamais une des tâches de la chaîne échoue. Afin de paramétrer cette chaîne d'action, Oozie propose aux utilisateurs une interface graphique pour faciliter sa configuration.
+
+Permet de faire des chaînes d'actions.
+Interface graphique.
+
+\subsection{Cron}
+
+Une solution beaucoup plus basique et qui existe depuis longtemps, est l'utilisation de la cron tab sous Linux. Cette solution propose uniquement de lancer une tâche tout les x temps, mais avec l'utilisation des messages broker, il n'est pas forcément nécessaire de lancer une suite de tâche. En effet, si les messages brokers permettent de déclencher des évènements afin de récupérer les données, les envoyer au logiciel de traitement de données puis les stocker dans la base de données sélectionnée, la seule tâche restante est la génération d'un rapport. L'utilisation de la cron tab est suffisante pour ce genre de tâche et ne nécessite aucune installation, car elle est installée avec Linux.
+
+\subsubsection{Conclusion}
+
+Nous pouvons constater que la partie orchestration ne nécessite pas d'avoir une solution très avancée, même des solution basiques suffisent. Mais si l'on veut pouvoir facilement configurer l'exécution de nos tâches des solutions graphique sont tout de même à notre disposition.
